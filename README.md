@@ -6,7 +6,7 @@ The frontend is fully completed, and the backend API is being developed to integ
 
 This project is built with scalability and production architecture in mind.
 
-📌 Current Status
+# 📌 Current Status
 
 ✅ Frontend UI Completed
 
@@ -20,80 +20,80 @@ This project is built with scalability and production architecture in mind.
 
 ⏳ Database Integration Pending
 
-🎯 Project Goal
+# 🎯 Project Goal
 
 HireBase is being built as a scalable job portal platform featuring:
 
 ● Secure JWT Authentication
 
-• Role-based dashboards
+● Role-based dashboards
 
-Job listings & filtering
+● Job listings & filtering
 
-Blog & discussion system
+● Blog & discussion system
 
-Admin control panel (planned)
+● Admin control panel (planned)
 
-🛠 Tech Stack (Current)
-Frontend
+# 🛠 Tech Stack (Current)
+# Frontend
 
-React.js
+● React.js
 
-React Router
+● React Router
 
-Axios
+● Axios
 
-Framer Motion
+● Framer Motion
 
-CSS3
+● CSS3
 
-React Icons
+● React Icons
 
-Backend (In Progress)
+# Backend (In Progress)
 
-Node.js
+● Node.js
 
-Express.js
+● Express.js
 
-MongoDB
+● MongoDB
 
-JWT Authentication
+● JWT Authentication
 
-HTTP-only Cookie Handling
+● HTTP-only Cookie Handling
 
-📂 Frontend Architecture
+# 📂 Frontend Architecture
 
-Reusable component structure
+● Reusable component structure
 
-Dedicated API layer (axios instance)
+● Dedicated API layer (axios instance)
 
-Organized folder structure
+● Organized folder structure
 
-Responsive breakpoints
+● Responsive breakpoints
 
-Animation integration
+● Animation integration
 
-Secure token handling logic prepared
+● Secure token handling logic prepared
 
-The frontend is built in a way that allows seamless backend integration once API endpoints are completed.
+● The frontend is built in a way that allows seamless backend integration once API endpoints are completed.
 
-🛣 Roadmap
+# 🛣 Roadmap
 
-Backend API Completion
+● Backend API Completion
 
-Database Schema Implementation
+● Database Schema Implementation
 
-Role-Based Access Control
+● Role-Based Access Control
 
-Job Application Flow
+● Job Application Flow
 
-Resume Upload System
+● Resume Upload System
 
-Admin Dashboard
+● Admin Dashboard
 
-Deployment & CI/CD Setup
+● Deployment & CI/CD Setup
 
-👨‍💻 Author
+# 👨‍💻 Author
 
-Yash Singhal
-Full Stack Developer (In Progress 🚀)
+● Yash Singhal
+● Full Stack Developer (In Progress 🚀)
