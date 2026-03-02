@@ -93,7 +93,8 @@ This project is built with scalability and production architecture in mind.
 
 ● Deployment & CI/CD Setup
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 ● Yash Singhal
+
 ● Full Stack Developer (In Progress 🚀)
