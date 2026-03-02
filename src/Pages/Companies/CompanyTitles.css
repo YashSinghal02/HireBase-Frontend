@@ -1,0 +1,29 @@
+.company-title-only {
+  display: grid;
+  grid-template-columns: 80px 1fr 150px 120px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #9ddbc8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.action-title {
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .company-title-only {
+    grid-template-columns: 60px 1fr 120px 100px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 500px) {
+  .company-title-only {
+    display: none; /* hide titles on small mobile */
+  }
+}

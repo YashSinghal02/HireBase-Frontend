@@ -1,0 +1,177 @@
+/* ============================= */
+/* ========== FOOTER =========== */
+/* ============================= */
+
+.footer {
+  width: 100%;
+  background: #0f1514;
+  border-top: 1px solid rgba(61, 170, 125, 0.2);
+  padding: 25px 0;
+  /* margin-top: 40px; */
+}
+
+/* Container */
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* ============================= */
+/* ========== LEFT SIDE ======== */
+/* ============================= */
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-logo {
+  width: 160px;
+  object-fit: contain;
+  filter: brightness(1.1);
+}
+
+.footer-left p {
+  font-size: 14px;
+  color: #9ca3af;
+  letter-spacing: 0.4px;
+}
+
+/* ============================= */
+/* ========== RIGHT SIDE ======= */
+/* ============================= */
+
+.footer-right {
+  display: flex;
+  gap: 18px;
+}
+
+/* Social Icons */
+.footer-right a {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(61, 170, 125, 0.2);
+  color: #3DAA7D;
+
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.footer-right a:hover {
+  background: #3DAA7D;
+  color: #0f1514;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(61, 170, 125, 0.155);
+}
+
+
+/* downtotop */
+.downtotop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Glass Effect */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.134);
+
+  /* Border Glow */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  /* Soft Shadow */
+  box-shadow:
+    0 0 15px rgba(61, 170, 125, 0.4),
+    0 8px 25px rgba(0, 0, 0, 0.4);
+
+
+  z-index: 9999;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+/* Icon Style */
+.downtotop svg {
+  font-size: 20px;
+  color: #3DAA7D;
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.downtotop:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow:
+    0 0 25px rgba(61, 170, 125, 0.515),
+    0 12px 35px rgba(0, 0, 0, 0.5);
+}
+
+.downtotop:hover svg {
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+/* Active Click Effect */
+.downtotop:active {
+  transform: scale(0.92);
+}
+
+/* Optional Floating Animation */
+@keyframes floatUpDown {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+.downtotop {
+  animation: floatUpDown 3s ease-in-out infinite;
+}
+
+
+/* ============================= */
+/* ========== RESPONSIVE ======= */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .footer-left {
+    align-items: center;
+  }
+
+  .footer-right {
+    justify-content: center;
+  }
+}

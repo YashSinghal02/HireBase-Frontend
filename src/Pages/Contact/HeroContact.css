@@ -1,0 +1,68 @@
+/* =========================================
+   CONTACT HERO SECTION
+========================================= */
+
+.contact-section {
+  position: relative;
+    padding: 100px 8% 50px 8%;
+  text-align: center;
+  background: radial-gradient(
+      circle at 70% 30%,
+      rgba(61, 170, 125, 0.066),
+      transparent 40%
+    ),
+    #0f1514;
+  color: white;
+  overflow: hidden;
+}
+
+.contact-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Badge */
+
+.contact-badge {
+  display: inline-block;
+  background: rgba(61, 170, 125, 0.15);
+  border: 1px solid rgba(61, 170, 125, 0.4);
+  color: #3DAA7D;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  font-weight: 550;
+}
+
+/* Title */
+
+.contact-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+.contact-title span {
+  background: linear-gradient(135deg, #3DAA7D, #7ed4b2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Text */
+
+.contact-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #b8c7c3;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .contact-title {
+    font-size: 36px;
+  }
+}

@@ -1,0 +1,114 @@
+.left-main-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+
+/* Section Title */
+.left-main-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #3DAA7D;
+}
+
+/* Card */
+.left-main-card {
+  background: #121b1a;
+  border: 1px solid rgba(61, 170, 125, 0.25);
+  border-radius: 18px;
+  padding: 26px;
+  color: #d1d5db;
+  line-height: 1.7;
+}
+
+/* Education Typography */
+.education h3 {
+  font-size: 20px;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.education h4 {
+  font-size: 16px;
+  color: #3DAA7D;
+}
+
+.education h5 {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* Skills */
+.skills-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skills-wrapper span {
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: rgba(61, 170, 125, 0.08);
+  border: 1px solid rgba(61, 170, 125, 0.4);
+  color: #3DAA7D;
+  font-size: 14px;
+}
+
+/* Resume */
+.resume-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.resume-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #3DAA7D;
+  color: #0f1514;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.resume-btn:hover{
+   background: #35c08c;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 992px) {
+  .left-main-title {
+    font-size: 24px;
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+  .left-main-title {
+    font-size: 22px;
+  }
+
+  .left-main-card {
+    padding: 20px;
+  }
+}
+
+/* ---------- Small Mobile ---------- */
+@media (max-width: 480px) {
+  .left-main-profile {
+    gap: 30px;
+  }
+
+  .left-main-title {
+    font-size: 20px;
+  }
+
+  .skills-wrapper span {
+    font-size: 13px;
+    padding: 6px 14px;
+  }
+}

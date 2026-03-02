@@ -1,0 +1,64 @@
+import "./RightMainProfile.css";
+import { FaLinkedin, FaGithub, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { motion } from "framer-motion";
+
+
+function RightMainProfile() {
+  return (
+    <motion.div className="right-main-profile"
+    initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+          viewport={{ once: true }}
+          >
+      <div className="right-main-person-details">
+        <h2 className="right-main-heading">Personal Details</h2>
+
+        <div className="right-main-detail-row">
+          <span className="right-main-label">Email :</span>
+          <span className="right-main-value">yash@gmail.com</span>
+        </div>
+
+        <div className="right-main-detail-row">
+          <span className="right-main-label">Age :</span>
+          <span className="right-main-value">21</span>
+        </div>
+
+        <div className="right-main-detail-row">
+          <span className="right-main-label">City :</span>
+          <span className="right-main-value">Dehradun</span>
+        </div>
+
+        <div className="right-main-detail-row">
+          <span className="right-main-label">Country :</span>
+          <span className="right-main-value">India</span>
+        </div>
+
+        <div className="right-main-detail-row">
+          <span className="right-main-label">Address :</span>
+          <span className="right-main-value">Majra</span>
+        </div>
+
+        <div className="right-main-detail-row">
+          <span className="right-main-label">Mobile :</span>
+          <span className="right-main-value">91-123456-789</span>
+        </div>
+
+        {/* Social Row */}
+        <div className="right-main-detail-row">
+          <span className="right-main-label">Social :</span>
+
+          <div className="right-main-social-icons">
+            <span><FaLinkedin /></span>
+            <span><FaGithub /></span>
+            <span><FaInstagram /></span>
+            {/* <span><FaWhatsapp /></span> */}
+          </div>
+        </div>
+
+      </div>
+    </motion.div>
+  );
+}
+
+export default RightMainProfile;

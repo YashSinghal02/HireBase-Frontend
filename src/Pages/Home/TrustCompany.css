@@ -1,0 +1,81 @@
+/* ===== WRAPPER ===== */
+.moving-wrapper {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 80px;
+  padding: 0px 20px;
+  margin-bottom: 80px;
+}
+
+/* ===== HEADING ===== */
+.trust-heading {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.trust-heading span {
+  color: #3DAA7D;
+}
+
+/* ===== MOVING CONTAINER ===== */
+.moving-trustCompany {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  width: max-content;
+  animation: scrollLeft 25s linear infinite;
+}
+/* Pause animation when hovering any logo */
+/* Pause animation ONLY when hovering an image */
+.moving-trustCompany:has(.moving-imgs-hero:hover) {
+  animation-play-state: paused;
+}
+/* ===== LOGO BOX ===== */
+.moving-imgs-hero {
+  width: 110px;
+  flex-shrink: 0;
+}
+
+.moving-imgs-hero img {
+  width: 100%;
+  height: auto;
+  /* filter: grayscale(100%); */
+  opacity: 0.9;
+  transition: 0.3s ease;
+}
+
+.moving-imgs-hero img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* ===== INFINITE SCROLL ANIMATION ===== */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .trust-heading {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .moving-imgs-hero {
+    width: 100px;
+  }
+
+  .moving-trustCompany {
+    gap: 40px;
+    animation-duration: 18s;
+  }
+}

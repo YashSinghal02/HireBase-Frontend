@@ -1,0 +1,56 @@
+.home-badge-section {
+  padding: 70px 8px 50px 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(61, 170, 125, 0.3);
+  padding: 6px 14px;
+  border-radius: 50px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.home-badge-avatars-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.home-badge-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  /* cursor: pointer; */
+}
+
+.home-badge-avatar-overlap-1 {
+  margin-left: -12px;
+}
+
+.home-badge-avatar-overlap-2 {
+  margin-left: -12px;
+}
+
+/* .avatar:hover {
+  transform: scale(1.1);
+  z-index: 10;
+} */
+
+.home-badge-trust-text {
+  font-size: 16px;
+  color: #b8c7c3;
+  font-weight: 500;
+}
+
+.home-badge-trust-text span {
+  color: #3DAA7D;
+  font-weight: 700;
+}

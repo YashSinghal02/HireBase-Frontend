@@ -1,0 +1,275 @@
+/* ================= ROOT ================= */
+.verify-email {
+  background: #0b0f14e7;
+  min-height: 100vh;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= BACKGROUND GLOW ================= */
+.big-circles-email {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.big-circle1-email,
+.big-circle2-email {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: pulseGlow 6s ease-in-out infinite alternate;
+  z-index: -1;
+
+  /* Auto responsive scaling */
+  width: clamp(300px, 40vw, 520px);
+  height: clamp(300px, 40vw, 520px);
+  opacity: 0.8;
+}
+
+.big-circle1-email {
+  top: -180px;
+  left: -180px;
+  background: radial-gradient(circle at 40% 40%, #3DAA7D, rgba(61,170,125,0.15));
+}
+
+.big-circle2-email {
+  bottom: -160px;
+  right: -160px;
+  background: radial-gradient(circle at 60% 60%, #2a8f68, rgba(30,120,90,0.12));
+  animation-delay: -3s;
+}
+
+/* Soft ambient center glow */
+.big-circles-email::before {
+  content: "";
+  position: absolute;
+  width: clamp(200px, 30vw, 400px);
+  height: clamp(200px, 30vw, 400px);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(61,170,125,0.08), transparent 70%);
+  filter: blur(80px);
+  animation: pulseGlow 8s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(1); opacity: 0.75; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+/* ================= CENTER ================= */
+.email-verify-container {
+  width: 100%;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= GLASS CARD ================= */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  padding: 52px 46px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    0 0 0 1px rgba(61, 170, 125, 0.05),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+  animation: cardFade 0.6s ease;
+}
+
+@keyframes cardFade {
+  from { opacity: 0; transform: translateY(25px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ================= ICON ================= */
+.email-icon-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.email-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(61,170,125,0.25), rgba(61,170,125,0.08));
+  border: 1px solid rgba(61,170,125,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(61,170,125,0.25);
+}
+
+.email-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke: #3DAA7D;
+}
+
+/* ================= TEXT ================= */
+.glass-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+  color: #f2f5f8;
+}
+
+.glass-card p {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.719);
+  line-height: 1.6;
+}
+
+/* ================= FORM ================= */
+.email-verify-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.email-verify-container label {
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.881);
+}
+
+/* Input */
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  stroke: rgba(61,170,125,0.6);
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.email-verify-container input[type="email"] {
+  width: 100%;
+  padding: 14px 16px 14px 42px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  color: #e8f0ea;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+  caret-color: #3DAA7D;
+}
+
+.email-verify-container input::placeholder {
+  color: rgba(255, 255, 255, 0.401);
+}
+
+.email-verify-container input:focus {
+  border-color: #3DAA7D;
+  /* background: rgba(61,170,125,0.08); */
+  box-shadow: 0 0 0 3px rgba(61, 170, 125, 0.1);
+}
+
+.input-wrap:focus-within svg {
+  stroke: #3DAA7D;
+}
+
+/* ================= BUTTON ================= */
+.verify-btn {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #3DAA7D;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  /* box-shadow: 0 8px 25px rgba(61,170,125,0.35); */
+}
+
+.verify-btn:hover {
+  background: #3daa7dd4;
+   box-shadow: 0 4px  13px 5px rgba(61, 170, 125, 0.06);
+}
+
+.verify-btn:active {
+  transform: scale(0.97);
+}
+
+/* ================= DIVIDER ================= */
+.verify-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.verify-divider span {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+
+.verify-divider p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.784);
+  margin: 0;
+}
+
+/* ================= BACK LINK ================= */
+.back-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  color: #f5f5f5;
+  cursor: pointer;
+  transition: 0.2s;
+  margin: 20px auto 0 auto;
+}
+
+.back-link:hover {
+  color: #3DAA7D;
+}
+
+
+
+
+/* ================= MOBILE CLEAN MODE ================= */
+@media (max-width: 480px) {
+  .big-circle1-email,
+  .big-circle2-email {
+    opacity: 0.35;
+    filter: blur(80px);
+  }
+
+  .glass-card {
+    padding: 36px 24px;
+  }
+}

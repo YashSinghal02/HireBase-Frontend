@@ -1,0 +1,135 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap'); */
+
+.home-blog-section {
+  background-color: #0f1514;
+  padding: 40px 40px;
+  /* min-height: 100vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-family: 'Barlow', sans-serif; */
+}
+
+.home-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.home-blog-card {
+  background: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.home-blog-card__image-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+
+.home-blog-card__image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.home-blog-card:hover .home-blog-card__image-wrapper img {
+  transform: scale(1.08);
+}
+
+.home-blog-card__date-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #3daa7d;
+  color: #fff;
+  text-align: center;
+  padding: 8px 14px;
+  line-height: 1.2;
+}
+
+.home-blog-card__date-badge .home-blog-card__day {
+  font-size: 22px;
+  font-weight: 700;
+  display: block;
+}
+
+.home-blog-card__date-badge .home-blog-card__month {
+  font-size: 13px;
+  font-weight: 400;
+  display: block;
+}
+
+.home-blog-card__body {
+  padding: 20px 22px 24px;
+}
+
+.home-blog-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 12px;
+  color: #888;
+  font-size: 13.5px;
+}
+
+.home-blog-card__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.home-blog-card__meta-item svg {
+  color: #aaa;
+}
+
+.home-blog-card__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+.home-blog-card__read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #444;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  /* font-family: 'Barlow', sans-serif; */
+}
+
+.home-blog-card__read-more:hover {
+  color: #3daa7d;
+}
+
+.home-blog-card__read-more svg {
+  transition: transform 0.2s ease;
+}
+
+.home-blog-card__read-more:hover svg {
+  transform: translateX(4px);
+}
+
+@media (max-width: 900px) {
+  .home-blog-grid {
+    grid-template-columns: 1fr;
+  }
+}

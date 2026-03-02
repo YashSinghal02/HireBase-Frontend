@@ -1,0 +1,67 @@
+.job-created-wrapper {
+  padding: 40px;
+  background: #0f1514;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* HEADER */
+.job-created-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* INPUT */
+.job-created-header input {
+  padding: 10px 14px;
+  width: 240px;
+  border: 1px solid #1e2a28;
+  background: #121a19;
+  border-radius: 8px;
+  outline: none;
+  color: white;
+  transition: 0.3s;
+}
+
+.job-created-header input:focus {
+  border-color: #3DAA7D;
+  box-shadow: 0 0 0 2px rgba(61, 170, 125, 0.2);
+}
+
+/* BUTTON */
+.new-job-btn {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.new-job-btn:hover {
+  background: rgba(61, 170, 125, 0.18);
+  border: 1px solid rgba(61, 170, 125, 0.5);
+  transform: translateY(-2px);
+}
+
+/* MOBILE HEADER FIX */
+@media (max-width: 520px) {
+  .job-created-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .job-created-header input {
+    width: 100%;
+  }
+
+  .new-job-btn {
+    width: 100%;
+  }
+}

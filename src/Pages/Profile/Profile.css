@@ -1,0 +1,13 @@
+.main-profile {
+  width: 92%;
+  max-width: 1100px;
+  margin: 60px auto;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  background: linear-gradient(145deg, #0f1e1738, #0b141077);
+  border: 1px solid rgba(61, 170, 125, 0.3);
+
+  /* box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); */
+}

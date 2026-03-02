@@ -1,0 +1,150 @@
+/* ===============================
+   Main Container
+================================= */
+.edit-profile-form-container {
+  background: #0f1514;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ===============================
+   Section Box
+================================= */
+.edit-profile-form-section {
+  background: #121a19;
+  border: 1px solid rgba(61, 170, 125, 0.25);
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  transition: 0.3s ease;
+}
+
+
+
+/* ===============================
+   Section Title
+================================= */
+.edit-profile-form-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #3DAA7D;
+  letter-spacing: 0.5px;
+}
+
+/* ===============================
+   Grid Layout
+================================= */
+.edit-profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px 30px;
+  margin-bottom: 25px;
+}
+
+/* ===============================
+   Form Field
+================================= */
+.edit-profile-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Full Width Field (textarea) */
+.edit-profile-form-full {
+  grid-column: 1 / -1;
+  margin-bottom: 25px;
+}
+
+/* ===============================
+   Label
+================================= */
+.edit-profile-form-field label {
+  font-size: 15px;
+  font-weight: 550;
+  color: #f9fcff;
+}
+
+/* ===============================
+   Input & Textarea
+================================= */
+.edit-profile-form-field input,
+.edit-profile-form-field textarea {
+  background: #0f1514;
+  border: 1px solid rgba(61, 170, 125, 0.3);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #ffffff;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+/* Focus Effect */
+.edit-profile-form-field input:focus,
+.edit-profile-form-field textarea:focus {
+  border-color: #3DAA7D;
+  box-shadow: 0 0 0 3px rgba(61, 170, 125, 0.15);
+}
+
+/* ===============================
+   Button
+================================= */
+.edit-profile-form-button {
+ background: #3DAA7D;
+  color: #0f1514;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.edit-profile-form-button:hover {
+ background: #35c08c;
+}
+
+/* ===============================
+   Responsive Design
+================================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .edit-profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-profile-form-section {
+    padding: 28px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .edit-profile-form-container {
+    padding: 25px 15px;
+  }
+
+  .edit-profile-form-title {
+    font-size: 22px;
+  }
+
+  .edit-profile-form-section {
+    padding: 22px;
+  }
+
+  .edit-profile-form-field input,
+  .edit-profile-form-field textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .edit-profile-form-button {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,47 @@
+.main-profile-wrapper {
+  background: #0f1514;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ================= DESKTOP ================= */
+.combine-main-profiles {
+  display: grid;
+  grid-template-columns: 65% 35%; /* better balance */
+  gap: 50px;
+  padding: 50px 60px;
+  max-width: 1400px;
+  margin: auto;
+  align-items: start;
+}
+
+/* ================= LARGE LAPTOP ================= */
+@media (max-width: 1200px) {
+  .combine-main-profiles {
+    grid-template-columns: 60% 40%;
+    padding: 40px 40px;
+  }
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 992px) {
+  .combine-main-profiles {
+    grid-template-columns: 1fr;
+    padding: 30px 25px;
+    gap: 40px;
+  }
+}
+
+/* ================= LARGE MOBILE ================= */
+@media (max-width: 768px) {
+  .combine-main-profiles {
+    padding: 25px 18px;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+  .combine-main-profiles {
+    padding: 20px 14px;
+  }
+}

@@ -1,0 +1,114 @@
+.process-section {
+  background-color: #0f1514;
+  padding: 80px 8%;
+  text-align: center;
+  color: white;
+}
+
+/* HEADER */
+
+.process-header h2 {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.process-header span {
+  color: #3DAA7D;
+}
+
+.process-header p {
+  margin-top: 12px;
+  color: #9ca3af;
+}
+
+/* WRAPPER */
+
+.process-wrapper {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  flex-wrap: wrap;
+}
+
+/* ITEM */
+
+.process-item {
+  position: relative;
+      width: 220px;
+    height: 220px;
+}
+
+/* CIRCLE */
+
+.circle {
+  position: relative;
+  z-index: 1; /* below arrow */
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(61, 170, 125, 0.08);
+  border: 1px solid rgba(61, 170, 125, 0.4);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  transition: 0.4s ease;
+}
+
+
+/* ICON */
+
+.icon {
+  font-size: 34px;
+  color: #3DAA7D;
+  margin-bottom: 18px;
+}
+
+/* TEXT */
+
+.circle h3 {
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+
+.circle p {
+  font-size: 14px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+/* ARROW (FRONT LAYER) */
+
+.arrow-svg {
+  position: absolute;
+ top: -25px;
+    left: -25px;
+  width: 270px;
+  height: 270px;
+  z-index: 2;
+  pointer-events: none;
+
+  animation: rotateArrow 8s linear infinite;
+  transform-origin: center;
+}
+/* Rotation Animation */
+
+@keyframes rotateArrow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .arrow-svg {
+    /* display: none; */
+  }
+}

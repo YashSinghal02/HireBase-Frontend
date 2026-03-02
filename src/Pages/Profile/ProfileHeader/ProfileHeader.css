@@ -1,0 +1,121 @@
+/* Banner */
+.profile-header-banner-img {
+  height: 240px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(61, 170, 125, 0.2);
+}
+
+.profile-header-banner-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* filter: brightness(0.6); */
+}
+
+/* Banner Edit Button */
+.upload-banner {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #28a070;
+  color: white;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.upload-banner:hover {
+  background: #3daa7d;
+  transform: scale(1.1);
+}
+
+/* Avatar Section */
+.profile-header-img-txt-flx {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 0 50px;
+  margin-top: -85px;
+}
+
+/* Avatar */
+.profile-header-main-img {
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  border: 5px solid #071a14;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.profile-header-main-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+/* DARK OVERLAY ON HOVER */
+.profile-header-main-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+/* Show overlay on hover */
+.profile-header-main-img:hover::after {
+  opacity: 1;
+}
+
+/* Upload Text (Hidden by default) */
+.upload-avatar {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Show text when hovering avatar */
+.profile-header-main-img:hover .upload-avatar {
+  opacity: 1;
+}
+
+/* Text */
+.profile-header-txt {
+  margin-top: 80px;
+}
+
+.profile-header-txt h3 {
+  font-size: 26px;
+  color: white;
+  font-weight: 600;
+}
+
+.profile-header-txt p {
+  color: #3daa7d;
+  margin-top: 6px;
+  font-size: 15px;
+}
