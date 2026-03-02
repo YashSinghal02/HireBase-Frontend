@@ -24,9 +24,9 @@ This project is built with scalability and production architecture in mind.
 
 HireBase is being built as a scalable job portal platform featuring:
 
-Secure JWT Authentication
+● Secure JWT Authentication
 
-Role-based dashboards
+• Role-based dashboards
 
 Job listings & filtering
 
