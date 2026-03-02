@@ -76,3 +76,24 @@ Animation integration
 Secure token handling logic prepared
 
 The frontend is built in a way that allows seamless backend integration once API endpoints are completed.
+
+🛣 Roadmap
+
+Backend API Completion
+
+Database Schema Implementation
+
+Role-Based Access Control
+
+Job Application Flow
+
+Resume Upload System
+
+Admin Dashboard
+
+Deployment & CI/CD Setup
+
+👨‍💻 Author
+
+Yash Singhal
+Full Stack Developer (In Progress 🚀)
