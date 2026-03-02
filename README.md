@@ -6,7 +6,7 @@ The frontend is fully completed, and the backend API is being developed to integ
 
 This project is built with scalability and production architecture in mind.
 
-# 📌 Current Status
+## 📌 Current Status
 
 ✅ Frontend UI Completed
 
@@ -20,9 +20,9 @@ This project is built with scalability and production architecture in mind.
 
 ⏳ Database Integration Pending
 
-# 🎯 Project Goal
+## 🎯 Project Goal
 
-HireBase is being built as a scalable job portal platform featuring:
+**HireBase is being built as a scalable job portal platform featuring:**
 
 ● Secure JWT Authentication
 
@@ -34,8 +34,8 @@ HireBase is being built as a scalable job portal platform featuring:
 
 ● Admin control panel (planned)
 
-# 🛠 Tech Stack (Current)
-# Frontend
+## 🛠 Tech Stack (Current)
+### Frontend
 
 ● React.js
 
@@ -49,7 +49,7 @@ HireBase is being built as a scalable job portal platform featuring:
 
 ● React Icons
 
-# Backend (In Progress)
+### Backend (In Progress)
 
 ● Node.js
 
@@ -61,7 +61,7 @@ HireBase is being built as a scalable job portal platform featuring:
 
 ● HTTP-only Cookie Handling
 
-# 📂 Frontend Architecture
+## 📂 Frontend Architecture
 
 ● Reusable component structure
 
@@ -77,7 +77,7 @@ HireBase is being built as a scalable job portal platform featuring:
 
 ● The frontend is built in a way that allows seamless backend integration once API endpoints are completed.
 
-# 🛣 Roadmap
+## 🛣 Roadmap
 
 ● Backend API Completion
 
