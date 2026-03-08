@@ -1,12 +1,15 @@
 import './EditProfile.css'
 import EditProfileForm from './EditProfileForm/EditProfileForm'
 
-function EditProfile() {
+function EditProfile({ setActiveTab, setRefreshProfile }) {
   return (
     <div>
-      <EditProfileForm/>
+      <EditProfileForm
+        setActiveTab={setActiveTab}
+        setRefreshProfile={setRefreshProfile}
+      />
     </div>
-  )
+  );
 }
 
 export default EditProfile

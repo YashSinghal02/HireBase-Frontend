@@ -70,12 +70,12 @@
 .playstore-button:hover {
   background: #3DAA7D;
   border-color: #3DAA7D;
-  transform: translateY(-3px);
+  transform: translateY(-1px);
   box-shadow: 0 15px 20px rgba(61, 170, 125, 0.144);
 }
 
-.icon {
-  height: 22px;
+.app-icon {
+  height: 26px;
   width: 22px;
 }
 

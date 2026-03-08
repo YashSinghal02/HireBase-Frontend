@@ -124,6 +124,103 @@
   /* transform: translateY(-1px); */
 }
 
+/* ===== TAG INPUT AREA ===== */
+
+.tag-input {
+  display: flex;
+  gap: 10px;
+}
+
+.tag-input input {
+  flex: 1;
+}
+
+.tag-input button {
+  background: #3DAA7D;
+  border: none;
+  color: #0f1514;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.25s;
+}
+
+.tag-input button:hover {
+  background: #35c08c;
+}
+
+/* ===== TAG CONTAINER ===== */
+
+.tag-container-job-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* ===== TAG CHIP ===== */
+
+.tag-job-form {
+  background: rgba(61,170,125,0.15);
+  border: 1px solid rgba(61,170,125,0.4);
+  color: #3DAA7D;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* delete icon */
+
+.tag-job-form span {
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.tag-job-form span:hover {
+  color: #ff6b6b;
+}
+/* SKills */
+
+.tag-container-job-form-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.tag-job-form-skills {
+  background: rgba(61,170,125,0.15);
+  border: 1px solid rgba(61,170,125,0.4);
+  color: #3DAA7D;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* delete icon */
+
+.tag-job-form-skills span {
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.tag-job-form-skills span:hover {
+  color: #ff6b6b;
+}
+
+
+
 /* ===== RESPONSIVE 2 COLUMN ===== */
 @media (min-width: 700px) {
   .jobform-form {

@@ -29,46 +29,15 @@ import About from "./Pages/About/About";
 import Blogs from "./Pages/Blogs/Blogs";
 import Contact from "./Pages/Contact/Contact";
 import Profile from "./Pages/Profile/Profile";
+import EditJobForm from "./Pages/JobsCreated/EditJobForm/EditJobForm";
+import ProtectedRoutes from "./Utils/ProtectedRoutes";
+import Admin from "./Pages/Admin/Admin";
 
 
 
 
 function App() {
   return (
-    // <BrowserRouter>
-    //   <Toaster position="top-right" />
-    //   <Routes>
-    //     <Route path="/" element={<Navbar/>} />
-    //     <Route path="/otp" element={<OTPSignup/>} />
-    //      <Route path="/login" element={<LoginForm/> } />
-    //     <Route path="/verifyemail" element={<VerifyEmail/> } />
-    //     <Route path="/resetpassword" element={<ResetPassword/> } />
-    //      <Route path="/verifyotp" element={<VerifyOTP/> } />
-    //       {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
-    //       <Route path="/navbar" element={<Navbar/> } />
-    //        <Route path="/home" element={<Home/>} />
-          
-          
-    //   </Routes>
-    // </BrowserRouter>
-
-    // New
-    //  <BrowserRouter>
-    //  <Navbar/>
-    //   <Toaster position="top-right" />
-    //   <Routes>
-    //     <Route path="/" element={<Navbar/>} />
-    //     <Route path="/otp" element={<OTPSignup/>} />
-    //      <Route path="/login" element={<LoginForm/> } />
-    //     <Route path="/verifyemail" element={<VerifyEmail/> } />
-    //     <Route path="/resetpassword" element={<ResetPassword/> } />
-    //      <Route path="/verifyotp" element={<VerifyOTP/> } />
-        
-    //        <Route path="/home" element={<Home/>} />
-          
-          
-    //   </Routes>
-    // </BrowserRouter>
 //  Combine Navbar + Sidebar
 <BrowserRouter>
 <Toaster position="bottom-right" />
@@ -86,6 +55,16 @@ function App() {
       <Route path="/login" element={<LoginForm />} />
        <Route path="/signup" element={<SignUpForm/>} />
         <Route path="/otp" element={<OTPSignup/>} />
+
+
+        {/* Admin */}
+        <Route path="/admin" element={
+          <ProtectedRoutes allowedRoles={["admin"]}>            
+            <Admin/>
+          </ProtectedRoutes>
+        } />
+
+
         {/* Profile */}
         <Route path="/profile" element={<Profile/>} />
       {/* Dashboard Section */}
@@ -93,13 +72,14 @@ function App() {
       {/* Empolyee */}
         <Route index element={<Jobs />} />
         <Route path="jobs" element={<Jobs />} />
-         <Route path="details" element={<JobDetails/>} />
+         <Route path="details/:id" element={<JobDetails/>} />
          <Route path="saved" element={<Savedjobs/>} />
           <Route path="applied" element={<AppliedJobs/>} />
           {/* Empolyer */}
           <Route path="companies" element={<Companies/>} />
           <Route path="newcompany" element={<CompanyForm/>} />
           <Route path="jobscreated" element={<JobsCreated/>} />
+          <Route path="jobsedit/:id" element={<EditJobForm/>} />
            <Route path="jobsform" element={<NewJobForm/>} />
            <Route path="settings" element={<Settings/>} />
       </Route>

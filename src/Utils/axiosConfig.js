@@ -39,7 +39,7 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // If access token expired
+    // If access token expired then immediately againg requesh the same URL
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -50,8 +50,11 @@ api.interceptors.response.use(
           { withCredentials: true }
         );
 
-        const newAccessToken = res.data.accessToken;
-
+        // const newAccessToken = res.data.accessToken;
+        // ***********//
+        const newAccessToken =res.headers.authorization.split(" ")[1];
+        console.log("newAccessToken",newAccessToken)
+        // ***********//
         // Save new token
         localStorage.setItem("accessToken", newAccessToken);
 

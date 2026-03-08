@@ -6,15 +6,21 @@ import "./ProfileTabSwitch.css";
 import { motion } from "framer-motion";
 
 
-function ProfileTabSwitch() {
+function ProfileTabSwitch({ refreshProfile, setRefreshProfile }) {
   const [activeTab, setActiveTab] = useState("MainProfile");
+  // const [refreshProfile, setRefreshProfile] = useState(false);
 
   const renderComponent = () => {
     switch (activeTab) {
       case "MainProfile":
-        return <MainProfile />;
+        return <MainProfile refreshProfile={refreshProfile} />;
       case "EditProfile":
-        return <EditProfile />;
+        return (
+          <EditProfile
+            setActiveTab={setActiveTab}
+            setRefreshProfile={setRefreshProfile}
+          />
+        );
       case "ChangePassword":
         return <ChangePassword />;
       default:

@@ -1,9 +1,27 @@
 import "./ProfileHeader.css";
 import profilebanner from '../../../assets/profilebanner.png'
+import me from '../../../assets/me.jpg'
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { api } from "@/Utils/axiosConfig";
+import { apiTryCatch } from "@/Utils/trycatch";
 
-
-function ProfileHeader() {
+function ProfileHeader({ refreshProfile }) {
+   const [data, setData] = useState(null);
+    
+      async function getProfile() {
+        await apiTryCatch(async () => {
+          const response = await api.get("/profile");
+          console.log(response.data)
+           const profile = response?.data?.data;
+            setData(profile);
+          // setData(response.data.data);
+        });
+      }
+      
+        useEffect(() => {
+          getProfile();
+        }, [refreshProfile]);
   return (
     <div>
       {/* Banner */}
@@ -27,7 +45,7 @@ function ProfileHeader() {
           viewport={{ once: true }}
         >
           <img
-            src="https://img.freepik.com/free-photo/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129416.jpg?uid=R144483096&ga=GA1.1.1228816863.1772011796&semt=ais_hybrid&w=740&q=80"
+            src={"https://img.freepik.com/free-photo/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129416.jpg?uid=R144483096&ga=GA1.1.1228816863.1772011796&semt=ais_hybrid&w=740&q=80"}
             alt="avatar"
           />
 
@@ -44,8 +62,8 @@ function ProfileHeader() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
         >
-          <h3>Yash Singhal</h3>
-          <p>Full Stack Developer</p>
+          <h3>{data?.name || "N/A"}</h3>
+          <p>{data?.occupation || "N/A"}</p>
         </motion.div>
       </div>
     </div>

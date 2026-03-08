@@ -8,7 +8,7 @@
 html, body {
   overflow-x: hidden;
   width: 100%;
-  background: #0f1514;
+  /* background: #0f1514; */
   font-family: 'Inter', sans-serif;
   font-size: 16px;
 }
@@ -119,14 +119,22 @@ html, body {
   margin-bottom: clamp(20px, 4vw, 30px);
 }
 
+/* ================= IMPROVED META PILLS ================= */
 .meta-pill {
-  background: #1a2422;
-  padding: 6px 14px;
-  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* slightly more space between icon and text */
+  background: #1f2a28; /* darker, smoother background */
+  padding: 8px 16px; /* more balanced padding */
+  border-radius: 25px; /* more rounded for modern look */
   font-size: clamp(12px, 1.6vw, 14px);
-  color: #ffffff;
-  border: 1px solid rgba(61, 170, 125, 0.2);
+  font-weight: 500;
+  color: #3DAA7D; /* consistent accent color */
+  border: 1px solid rgba(61, 170, 125, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.074); /* subtle shadow for depth */
 }
+
 
 /* ================= SECTIONS ================= */
 .jobDetails-section {

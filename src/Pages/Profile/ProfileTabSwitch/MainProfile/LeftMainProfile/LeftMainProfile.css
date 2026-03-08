@@ -79,6 +79,12 @@
    background: #35c08c;
 }
 
+.education-item{
+  margin-bottom:10px;
+  padding-bottom:10px;
+  border-bottom:1px solid #1e2a28;
+}
+
 /* ---------- Tablet ---------- */
 @media (max-width: 992px) {
   .left-main-title {
