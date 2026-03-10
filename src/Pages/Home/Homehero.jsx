@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { motion } from "framer-motion";
 import hero_home from '../../assets/hero-home2.jpg';
 import { IoSearch } from "react-icons/io5";
 
-function Homehero() {
+
+function Homehero({ jobs, setFilteredJobs }) {
+
+const input = useRef();
+
+    function SearchItem() {
+
+    const userInput = input.current.value.toLowerCase();
+
+    const result = jobs.filter((job) =>
+     job.jobTitle?.toLowerCase().includes(userInput) ||
+  job.companyName?.toLowerCase().includes(userInput) ||
+  job.location?.toLowerCase().includes(userInput) ||
+  job.description?.toLowerCase().includes(userInput) ||
+  job.jobType?.toLowerCase().includes(userInput)
+    
+    );
+
+    setFilteredJobs(result);
+  }
   return (
     <div>
       <div className="home-hero">
@@ -40,7 +59,7 @@ function Homehero() {
             transition={{ delay: 0.6, duration: 0.5 }}
           >
             <div className='search-home-icon'><IoSearch /></div>
-            <input type="text" placeholder='Search Job title or keyword' id='search-bar-home' />
+            <input type="text" placeholder='Search Job title or keyword' id='search-bar-home'  ref={input} onChange={SearchItem}  />
             <motion.button 
               className='search-home-btn'
               whileHover={{ scale: 1.05 }}

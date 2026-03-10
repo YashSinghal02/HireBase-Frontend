@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './HeroJob.css'
 import { IoSearch } from "react-icons/io5";
 import { motion } from "framer-motion";
 
-function HeroJob() {
+
+function HeroJob({ jobs, setFilteredJobs }) {
+
+  
+const input = useRef();
+
+  function SearchItem() {
+
+    const userInput = input.current.value.toLowerCase();
+
+    const result = jobs.filter((job) =>
+     job.jobTitle?.toLowerCase().includes(userInput) ||
+  job.companyName?.toLowerCase().includes(userInput) ||
+  job.location?.toLowerCase().includes(userInput) ||
+  job.description?.toLowerCase().includes(userInput) ||
+  job.jobType?.toLowerCase().includes(userInput)
+    
+    );
+
+    setFilteredJobs(result);
+  }
   return (
     <div className="jobs-wrapper">
       <motion.div
@@ -56,7 +76,7 @@ function HeroJob() {
           <input
             type="text"
             placeholder="Search job title or keyword"
-            className="search-bar-home"
+            className="search-bar-home"  ref={input} onChange={SearchItem} 
           />
           <button className="search-home-btn">Search</button>
         </motion.div>

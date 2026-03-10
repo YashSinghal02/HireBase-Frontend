@@ -32,6 +32,8 @@ import Profile from "./Pages/Profile/Profile";
 import EditJobForm from "./Pages/JobsCreated/EditJobForm/EditJobForm";
 import ProtectedRoutes from "./Utils/ProtectedRoutes";
 import Admin from "./Pages/Admin/Admin";
+import Unauthorized from "./Pages/Unauthorized/Unauthorized";
+import EditCompany from "./Pages/Companies/EditCompany/EditCompany";
 
 
 
@@ -40,7 +42,7 @@ function App() {
   return (
 //  Combine Navbar + Sidebar
 <BrowserRouter>
-<Toaster position="bottom-right" />
+<Toaster position="bottom-left" />
 <ScrollToTop/>
   <Routes>
 
@@ -55,7 +57,7 @@ function App() {
       <Route path="/login" element={<LoginForm />} />
        <Route path="/signup" element={<SignUpForm/>} />
         <Route path="/otp" element={<OTPSignup/>} />
-
+  <Route path="/unauthorized" element={<Unauthorized/>} />
 
         {/* Admin */}
         <Route path="/admin" element={
@@ -78,6 +80,7 @@ function App() {
           {/* Empolyer */}
           <Route path="companies" element={<Companies/>} />
           <Route path="newcompany" element={<CompanyForm/>} />
+          <Route path="companyedit/:id" element={<EditCompany/>} />
           <Route path="jobscreated" element={<JobsCreated/>} />
           <Route path="jobsedit/:id" element={<EditJobForm/>} />
            <Route path="jobsform" element={<NewJobForm/>} />

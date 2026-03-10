@@ -1,15 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import "./CompanyForm.css";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { api } from "@/Utils/axiosConfig";
 import { apiTryCatch } from "@/Utils/trycatch";
 import toast from "react-hot-toast";
 
 
-function CompanyForm() {
+function EditCompany() {
+      const { id } = useParams();
   const navigate = useNavigate();
 
   const [data, setData] = useState({
@@ -20,16 +20,46 @@ function CompanyForm() {
     logo: "",
   });
 
-  async function SubmitForm(e) {
+  // Fetch Company
+    useEffect(() => {
+  
+      const fetchCompany = async () => {
+  
+        await apiTryCatch(async () => {
+  
+          const response = await api.get(`/companies/${id}`);
+          const company = response.data.data;
+  
+          setData({
+            companyName: company.companyName || "",
+            website: company.website || "",
+            location: company.location || "",
+            description: company.description || "",
+            logo: "",
+          });
+  
+        });
+  
+      };
+  
+      fetchCompany();
+  
+    }, [id]);
+
+   async function SubmitForm(e) {
+
     e.preventDefault();
 
     await apiTryCatch(async () => {
-      const response = await api.post("/companies/", data);
+
+      const response = await api.put(`/companies/${id}`, data);
 
       toast.success(response?.data?.message);
 
       navigate("/dashboard/companies");
+
     });
+
   }
 
   return (
@@ -45,7 +75,7 @@ function CompanyForm() {
           <button className="back-btn" onClick={() => navigate(-1)}>
             <FaArrowLeft /> Back
           </button>
-          <h2>Company Setup</h2>
+          <h2>Edit Company Setup</h2>
         </div>
         <form className="company-form" onSubmit={SubmitForm}>
           {/* Row 1 */}
@@ -135,4 +165,4 @@ function CompanyForm() {
   );
 }
 
-export default CompanyForm;
+export default EditCompany;

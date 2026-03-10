@@ -12,33 +12,21 @@ import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { api } from '@/Utils/axiosConfig';
 import { apiTryCatch } from '@/Utils/trycatch';
+import NoPageFound from "../../assets/NoPageFound.png"
 
 
 
 
-
-function JobsCards() {
-
-  const [data,setData] = useState([]);
-
-  async function getJobs() {
-    await apiTryCatch(async()=>{
-      const response = await api.get("/employer/jobs");
-      setData(response.data.data);
-    })
-  }
-
-  useEffect(()=>{
-    getJobs();
-  },[])
+function JobsCards({ jobs }) {
 
   return (
     <div className="jobCards-home-wrapper">
 
-      {data.map((x)=>(
+      { jobs.length >0? jobs.map((x)=>(
         <div className="jobCards-home" key={x._id}>
 
           <div className="jobCards-home-top">
+           
             <span className="jobCards-home-date">Today</span>
             <span className='bookmark-circle'>
               <FaRegBookmark className="jobCards-home-bookmark"/>
@@ -46,8 +34,12 @@ function JobsCards() {
           </div>
 
           <div className="jobCards-home-company">
-            <img src={x.companyLogo ? x.companyLogo : Blinkit} 
-             alt="company" className="jobCards-home-logo"/>
+            <img 
+              src={x.companyLogo ? x.companyLogo : Blinkit}
+              alt="company"
+              className="jobCards-home-logo"
+            />
+
             <div>
               <h4>{x.companyName}</h4>
               <span>{x.location}</span>
@@ -76,7 +68,7 @@ function JobsCards() {
           </div>
 
         </div>
-      ))}
+      )): <img src={NoPageFound} alt="" style={{width:"350px"}}/>}
 
     </div>
   );

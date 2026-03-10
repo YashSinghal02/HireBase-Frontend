@@ -5,15 +5,32 @@ import Microsoft from '../../assets/Microsoft.png'
 import Airtel from '../../assets/Airtel.png'
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { apiTryCatch } from "@/Utils/trycatch";
+import { api } from "@/Utils/axiosConfig";
+import { useState,useEffect } from "react";
+import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 
 
 function CompanyCreate() {
-  const companies = [
-    { id: 1, name: "Google", date: "2026-02-03", logo: google },
-    { id: 2, name: "Microsoft", date: "2026-02-03", logo: Microsoft },
-    { id: 3, name: "Wipro", date: "2026-02-04", logo: Wipro },
-    { id: 4, name: "Airtel", date: "2026-02-05", logo:Airtel },
-  ];
+const[data,setData]=useState([]);
+
+  async function getCompanies() {
+    await apiTryCatch(async()=>{
+      const response=await api.get("/companies/");
+      setData(response.data.data)
+    })
+  }
+useEffect(() => {
+    getCompanies();
+  }, [])
+
+  async function deleteCard(id) {
+    await apiTryCatch(async()=>{
+      await api.delete(`/companies/${id}`);
+      getCompanies()
+    })
+  }
 
   return (
     <div className="company-table">
@@ -24,23 +41,28 @@ function CompanyCreate() {
         <span>Action</span>
       </div>
 
-      {companies.map((company) => (
-        <div className="company-row" key={company.id}>
+      {data.map((company) => {
+        let created = dayjs(company.createdAt).format("DD/MM/YY");
+        return(
+        <div className="company-row" key={company._id}>
           <div className="logo-col">
-            <img src={company.logo} alt={company.name} />
+            <img src={company.logo ? company.logo : google}  alt={company.companyName} />
           </div>
-          <div>{company.name}</div>
-          <div>{company.date}</div>
+          <div>{company.companyName}</div>
+          <div>{created}</div>
          <div className="action-col">
+          <Link to={`/dashboard/companyedit/${company._id}`}>
   <div className="action-btn edit-btn">
     <MdEdit size={18} />
   </div>
-  <div className="action-btn delete-btn">
+  </Link>
+  <div className="action-btn delete-btn" onClick={() => deleteCard(company._id)}>
     <MdDelete size={18} />
   </div>
 </div>
         </div>
-      ))}
+      )
+      })}
     </div>
   );
 }

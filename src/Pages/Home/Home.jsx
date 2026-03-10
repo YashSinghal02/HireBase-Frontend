@@ -12,18 +12,37 @@ import HomeTestimonial from "./HomeTestimonial";
 import HomeFAQs from "./HomeFAQs";
 import HomeBadge from "./HomeBadge";
 import JobCardTitle from "../Jobs/JobCardTitle";
+import React, { useEffect, useState } from "react";
+import { apiTryCatch } from "@/Utils/trycatch";
+import { api } from "@/Utils/axiosConfig";
+
 
 function Home() {
+    const [jobs, setJobs] = useState([]);
+    const [filteredJobs, setFilteredJobs] = useState([]);
+    useEffect(() => {
+      const getData = async () => {
+        await apiTryCatch(async () => {
+          const response = await api.get("/employer/jobs");
+          setJobs(response.data.data);
+          setFilteredJobs(response.data.data);
+        });
+      };
+  
+      getData();
+    }, []);
+  
   return (
     <div>
       <HomeBadge />
-      <Homehero /> {/* 1️⃣ Strong first impression */}
+      <Homehero  jobs={jobs} setFilteredJobs={setFilteredJobs}/> {/* 1️⃣ Strong first impression */}
+      <JobCardTitle/>{/* 5️ It is title of Live jobs (engagement) only */}
+      <JobsCards jobs={filteredJobs} /> {/* 6️⃣ Live jobs (engagement) */}
       <TrustCompany /> {/* 2️⃣ Social proof early */}
       <HomeCards /> {/* 3️⃣ Key features / value */}
       <WhyPopular /> {/* 4️⃣ Why choose HireBase */}
       <WorkingProcess /> {/* 5️⃣ How it works */}
-      <JobCardTitle/>{/* 5️ It is title of Live jobs (engagement) only */}
-      <JobsCards /> {/* 6️⃣ Live jobs (engagement) */}
+      
       <HomeTestimonial /> {/* 7️⃣ More social proof */}
       <DownloadApp /> {/* 8️⃣ Conversion CTA */}
       <HomeFAQs /> {/* 9️⃣ Objection handling */}
