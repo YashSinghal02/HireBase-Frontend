@@ -2,8 +2,56 @@ import { Link } from "react-router-dom";
 import "./Companies.css";
 import CompanyCreate from "./CompanyCreate";
 import { motion } from "framer-motion";
+import { apiTryCatch } from "@/Utils/trycatch";
+import { api } from "@/Utils/axiosConfig";
+import React, { useEffect, useState, useRef } from "react";
+import toast from "react-hot-toast";
+import dayjs from "dayjs";
+
 
 function Companies() {
+    // For Get JOb Card
+  const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+
+ async function getJobs() {
+  await apiTryCatch(async () => {
+    const response = await api.get("/companies/");
+    setJobs(response.data.data);
+    setFilteredJobs(response.data.data);
+  });
+}
+  useEffect(() => {
+    getJobs()
+  }, []);
+
+  // Delte
+    async function deleteCard(id) {
+    await apiTryCatch(async()=>{
+    const response=await api.delete(`/companies/${id}`);
+      toast.success(response?.data?.message);
+      getJobs()
+    })
+  }
+
+  // Search Filter
+  const input = useRef();
+
+  function SearchItem() {
+    const userInput = input.current.value.toLowerCase();
+
+    const result = jobs.filter(
+      (job) =>
+        job.jobTitle?.toLowerCase().includes(userInput) ||
+        job.companyName?.toLowerCase().includes(userInput) ||
+        job.location?.toLowerCase().includes(userInput) ||
+        job.description?.toLowerCase().includes(userInput) ||
+        dayjs(job.createdAt).format("DD-MMM-YYYY")?.toLowerCase().includes(userInput) ||
+        job.experienceLevel?.toLowerCase().includes(userInput),
+    );
+
+    setFilteredJobs(result);
+  }
   return (
     <motion.div
       className="companies-wrapper"
@@ -21,6 +69,7 @@ function Companies() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
+          ref={input} onChange={SearchItem} 
         />
         {/* new-company-btn */}
         <Link to="/dashboard/newcompany">
@@ -36,7 +85,7 @@ function Companies() {
         </Link>
       </div>
 
-      <CompanyCreate />
+      <CompanyCreate jobs={filteredJobs} deleteCard={deleteCard}/>
 
       <p className="companies-footer">
         A list of your recent registered companies

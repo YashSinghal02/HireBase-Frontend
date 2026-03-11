@@ -10,27 +10,28 @@ import { api } from "@/Utils/axiosConfig";
 import { useState,useEffect } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import NoPageFound from "../../assets/NoPageFound.png"
 
 
-function CompanyCreate() {
-const[data,setData]=useState([]);
+function CompanyCreate({ jobs,deleteCard }) {
+// const[data,setData]=useState([]);
 
-  async function getCompanies() {
-    await apiTryCatch(async()=>{
-      const response=await api.get("/companies/");
-      setData(response.data.data)
-    })
-  }
-useEffect(() => {
-    getCompanies();
-  }, [])
+//   async function getCompanies() {
+//     await apiTryCatch(async()=>{
+//       const response=await api.get("/companies/");
+//       setData(response.data.data)
+//     })
+//   }
+// useEffect(() => {
+//     getCompanies();
+//   }, [])
 
-  async function deleteCard(id) {
-    await apiTryCatch(async()=>{
-      await api.delete(`/companies/${id}`);
-      getCompanies()
-    })
-  }
+//   async function deleteCard(id) {
+//     await apiTryCatch(async()=>{
+//       await api.delete(`/companies/${id}`);
+//       getCompanies()
+//     })
+//   }
 
   return (
     <div className="company-table">
@@ -41,7 +42,7 @@ useEffect(() => {
         <span>Action</span>
       </div>
 
-      {data.map((company) => {
+      {jobs.length >0? jobs.map((company) => {
         let created = dayjs(company.createdAt).format("DD/MM/YY");
         return(
         <div className="company-row" key={company._id}>
@@ -62,7 +63,7 @@ useEffect(() => {
 </div>
         </div>
       )
-      })}
+      }):<img src={NoPageFound} alt="" style={{width:"350px",margin:"auto",padding:"10px"}}/>}
     </div>
   );
 }

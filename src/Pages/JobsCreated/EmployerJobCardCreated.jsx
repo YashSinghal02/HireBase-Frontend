@@ -6,33 +6,16 @@ import { apiTryCatch } from "@/Utils/trycatch";
 import { api } from "@/Utils/axiosConfig";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import NoPageFound from "../../assets/NoPageFound.png"
 
 
-function EmployerJobCardCreated() {
+function EmployerJobCardCreated({ jobs,deleteCard }) {
 
-  const[data,setData]=useState([]);
-
-  async function getJobs() {
-    await apiTryCatch(async()=>{
-      const response=await api.get("/employer/jobs");
-      setData(response.data.data)
-    })
-  }
-useEffect(() => {
-    getJobs();
-  }, [])
-
-  async function deleteCard(id) {
-    await apiTryCatch(async()=>{
-      await api.delete(`/employer/jobs/${id}`);
-      getJobs()
-    })
-  }
 
 
   return (
     <div className="job-item-card-wrapper">
-      {data.map((x) => {
+      { jobs.length >0? jobs.map((x) => {
         let created = dayjs(x.createdAt).format("DD-MMM-YYYY");
         return(
         <div className="job-item-card" key={x._id}>
@@ -85,7 +68,7 @@ useEffect(() => {
         </div>
       )
       }
-      )}
+      ): <img src={NoPageFound} alt="" style={{width:"350px",margin:"auto"}}/>}
     </div>
   );
 }

@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 //  Create the provider component
 export const AuthContextProvider = ({ children }) => {
   //const{userId,role}=localStorage.getItem(JSON.parse(userDetails))
-  const role = "employee";  
+  const role = "admin";  
   const isAuthorized = true;
 
   return (
