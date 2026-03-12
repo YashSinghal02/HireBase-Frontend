@@ -1,100 +1,113 @@
-# HireBase – Job Portal (Frontend Complete)
+# HireBase – Job Portal Frontend
 
-HireBase is a full-stack job portal project currently under active development.
+HireBase is a modern job portal application designed to connect employers and job seekers.
+This repository contains the **frontend implementation** built using React.js.
 
-The frontend is fully completed, and the backend API is being developed to integrate authentication, job management, and dashboard functionality.
+The frontend provides the user interface for browsing jobs, authentication flows, and dashboard interactions while integrating with backend APIs.
 
-This project is built with scalability and production architecture in mind.
+---
 
-## 📌 Current Status
+## Project Status
 
-✅ Frontend UI Completed
+* Frontend UI completed
+* Responsive layout implemented
+* Authentication flow designed
+* Axios interceptors configured for API requests
+* Backend API integration in progress
 
-✅ Responsive Design Implemented
+---
 
-✅ Authentication Flow Designed (Frontend)
+## Tech Stack
 
-✅ Axios Interceptors Setup
+* React.js
+* React Router
+* Axios
+* Framer Motion
+* CSS3
+* React Icons
 
-⏳ Backend API Development in Progress
+---
 
-⏳ Database Integration Pending
+## Features
 
-## 🎯 Project Goal
+* User authentication interface
+* Job listings and job detail pages
+* Job filtering and browsing UI
+* Responsive design for different screen sizes
+* Reusable component architecture
+* Animation support using Framer Motion
+* API integration structure using Axios
 
-**HireBase is being built as a scalable job portal platform featuring:**
+---
 
-● Secure JWT Authentication
+## Project Structure
 
-● Role-based dashboards
+```
+src/
+ ├── components
+ ├── pages
+ ├── assets
+ ├── api
+ ├── hooks
+ ├── context
+ └── utils
+```
 
-● Job listings & filtering
+---
 
-● Blog & discussion system
+## Installation
 
-● Admin control panel (planned)
+### 1. Clone the repository
 
-## 🛠 Tech Stack (Current)
-### Frontend
+```bash
+git clone https://github.com/YashSinghal02/HireBase-Frontend.git
+```
 
-● React.js
+### 2. Navigate into the project folder
 
-● React Router
+```bash
+cd HireBase-Frontend
+```
 
-● Axios
+### 3. Install dependencies
 
-● Framer Motion
+```bash
+npm install
+```
 
-● CSS3
+### 4. Start the development server
 
-● React Icons
+```bash
+npm run dev
+```
 
-### Backend (In Progress)
+The application will run on:
 
-● Node.js
+```
+http://localhost:5173
+```
 
-● Express.js
+---
 
-● MongoDB
+## Future Improvements
 
-● JWT Authentication
+* Backend API integration
+* Job application system
+* User dashboard
+* Resume upload functionality
+* Admin dashboard
 
-● HTTP-only Cookie Handling
+---
 
-## 📂 Frontend Architecture
+## License
 
-● Reusable component structure
+This project is licensed under the MIT License.
 
-● Dedicated API layer (axios instance)
+Copyright (c) 2026 Yash Singhal
 
-● Organized folder structure
+---
 
-● Responsive breakpoints
+## Author
 
-● Animation integration
-
-● Secure token handling logic prepared
-
-● The frontend is built in a way that allows seamless backend integration once API endpoints are completed.
-
-## 🛣 Roadmap
-
-● Backend API Completion
-
-● Database Schema Implementation
-
-● Role-Based Access Control
-
-● Job Application Flow
-
-● Resume Upload System
-
-● Admin Dashboard
-
-● Deployment & CI/CD Setup
-
-## 👨‍💻 Author
-
-● Yash Singhal
-
-● Full Stack Developer (In Progress 🚀)
+Yash Singhal
+Aspiring Full Stack Developer specializing in the MERN stack.
