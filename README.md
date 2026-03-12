@@ -8,13 +8,13 @@ The frontend provides the user interface for browsing jobs, authentication flows
 ---
 ## Screenshots
 
-![Home Page](./screenshots/signup.png)
+![SignUp Page](./screenshots/signup.png)
 
-![Job Listing](./screenshots/login.png)
+![Login Listing](./screenshots/login.png)
 
-![Login Page](./screenshots/home.png)
+![Home Page](./screenshots/home.png)
 
-![Login Page](./screenshots/dashboard.png)
+![Dashboard Page](./screenshots/dashboard.png)
 
 ---
 
