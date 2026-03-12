@@ -6,6 +6,17 @@ This repository contains the **frontend implementation** built using React.js.
 The frontend provides the user interface for browsing jobs, authentication flows, and dashboard interactions while integrating with backend APIs.
 
 ---
+## Screenshots
+
+![Home Page](./screenshots/signup.png)
+
+![Job Listing](./screenshots/login.png)
+
+![Login Page](./screenshots/home.png)
+
+![Login Page](./screenshots/dashboard.png)
+
+---
 
 ## Project Status
 
