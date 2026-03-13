@@ -1,13 +1,16 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate,useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import "./NewJobForm.css";
 import { motion } from "framer-motion";
 import { apiTryCatch } from "@/Utils/trycatch";
 import { api } from "@/Utils/axiosConfig";
 import toast from "react-hot-toast";
+import { AuthContext } from "@/AuthContext/AuthContext";
+
 
 function NewJobForm() {
+   const { userId } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // Responsibility state
@@ -81,7 +84,7 @@ function NewJobForm() {
         skills,
       };
 
-      const response = await api.post("/employer/jobs", payload);
+      const response = await api.post(`/employer/jobs/${userId}`, payload);
 
       toast.success(response?.data?.message);
 

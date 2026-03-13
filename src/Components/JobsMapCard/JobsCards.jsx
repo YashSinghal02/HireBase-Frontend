@@ -1,23 +1,36 @@
 import './JobsCards.css'
 import { FaBookmark } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa6";
-
 import Blinkit from '../../assets/Blinkit.png'
-// import Zomato from '../../assets/Zomato.png'
-// import Swiggy from '../../assets/Swiggy.png'
-// import Amazon from '../../assets/Amazonlogo.png'
-// import Facebook from '../../assets/Facebooklogo.png'
-// import Google from '../../assets/Googlelogo.png'
 import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { api } from '@/Utils/axiosConfig';
 import { apiTryCatch } from '@/Utils/trycatch';
 import NoPageFound from "../../assets/NoPageFound.png"
-
+import toast from "react-hot-toast";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 
 
 function JobsCards({ jobs }) {
+
+  // Apply Jobs
+ async function handleApply(jobId) {
+  await apiTryCatch(async () => {
+    const res = await api.post(`/jobs/${jobId}/apply/`);
+    toast.success(res.data.message);
+  });
+} 
+
+// Save Jobs
+ async function handleSave(jobId) {
+  await apiTryCatch(async () => {
+    const res = await api.post(`/savedjobs/${jobId}/save`);
+    toast.success(res.data.message);
+  });
+} 
 
   return (
     <div className="jobCards-home-wrapper">
@@ -27,8 +40,8 @@ function JobsCards({ jobs }) {
 
           <div className="jobCards-home-top">
            
-            <span className="jobCards-home-date">Today</span>
-            <span className='bookmark-circle'>
+            <span className="jobCards-home-date"><p>Posted: {dayjs(x.createdAt).fromNow()}</p></span>
+            <span className='bookmark-circle'  onClick={() => handleSave(x._id)}>
               <FaRegBookmark className="jobCards-home-bookmark"/>
             </span>
           </div>
@@ -55,17 +68,18 @@ function JobsCards({ jobs }) {
           <div className="jobCards-home-tags">
             <span className="tag-blue">{x.positions} Positions</span>
             <span className="tag-orange">{x.jobType}</span>
-            <span className="tag-purple">{x.salary} LPA</span>
+            <span className="tag-purple">{x.salary} </span>
           </div>
 
           <div className="jobCards-home-buttons">
-            <button className="apply-btn">Apply</button>
+            <button className="apply-btn" onClick={() => handleApply(x._id)}>Apply</button>
 
             <Link to={`/dashboard/details/${x._id}`}>
               <button className="details-btn">Details</button>
             </Link>
 
           </div>
+           {/* <p>Posted by: {x.postedBy.name}</p> */}
 
         </div>
       )): <img src={NoPageFound} alt="" style={{width:"350px"}}/>}

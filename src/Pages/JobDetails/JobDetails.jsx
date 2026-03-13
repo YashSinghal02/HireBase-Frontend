@@ -9,6 +9,7 @@ import { apiTryCatch } from '@/Utils/trycatch';
 import { useParams } from "react-router-dom";
 import { FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
+import toast from "react-hot-toast";
 
 
 
@@ -30,6 +31,22 @@ function JobDetails() {
   useEffect(()=>{
     getJobs();
   },[id])
+
+    // Apply Jobs
+ async function handleApply(jobId) {
+  await apiTryCatch(async () => {
+    const res = await api.post(`/jobs/${jobId}/apply/`);
+    toast.success(res.data.message);
+  });
+} 
+
+// Save Jobs
+ async function handleSave(jobId) {
+  await apiTryCatch(async () => {
+    const res = await api.post(`/savedjobs/${jobId}/save`);
+    toast.success(res.data.message);
+  });
+} 
 
   return (
     <div className="jobDetails-wrapper">
@@ -100,8 +117,8 @@ function JobDetails() {
 
         {/* Bottom Buttons */}
         <div className="jobDetails-buttons">
-          <button className="save-btn">Save</button>
-          <button className="apply-btn-main">Apply Now</button>
+          <button className="save-btn" onClick={() => handleSave(data._id)}>Save</button>
+          <button className="apply-btn-main" onClick={() => handleApply(data._id)}>Apply Now</button>
          </div>
 
         </div>

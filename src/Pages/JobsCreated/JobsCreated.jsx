@@ -4,20 +4,25 @@ import "./jobscreated.css";
 import { motion } from "framer-motion";
 import { apiTryCatch } from "@/Utils/trycatch";
 import { api } from "@/Utils/axiosConfig";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import toast from "react-hot-toast";
 import dayjs from "dayjs";
+import { AuthContext } from "@/AuthContext/AuthContext";
+
+
 
 function JobsCreated() {
+  const { userId } = useContext(AuthContext);
+
   // For Get JOb Card
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
 
   async function getJobs() {
     await apiTryCatch(async () => {
-      const response = await api.get("/employer/jobs");
-      setJobs(response.data.data);
-      setFilteredJobs(response.data.data);
+      const response = await api.get(`/user/getjobs/${userId}`);
+      setJobs(response.data.data.createdJobs);
+      setFilteredJobs(response.data.data.createdJobs);
     });
   }
   useEffect(() => {

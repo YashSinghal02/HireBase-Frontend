@@ -8,6 +8,7 @@ import logo from "../../../assets/logo.png";
 import { api } from "../../../Utils/axiosConfig.js";
 import { apiTryCatch } from "../../../Utils/trycatch.js";
 
+
 function LoginForm() {
   const navigate = useNavigate();
 
@@ -16,44 +17,46 @@ function LoginForm() {
     password: "",
   });
 
+  // async function SubmitForm(e) {
+  //   e.preventDefault();
+  //   await apiTryCatch(async () => {
+  //     const response = await api.post("/user/login", data);
+  //     console.log("Server response:", response.data);
+  //     console.log(response.headers.authorization);
+  //     // localStorage.setItem("accessToken",response.headers.authorization)
+  //     const token = response.headers.authorization.split(" ")[1];
+  //     localStorage.setItem("accessToken", token);
+  //     const {useId, role}=response.data;
+      
+  //     setData({
+  //       email: "",
+  //       password: "",
+  //     });
+  //     toast.success(response?.data?.message);
+  //     navigate("/dashboard");
+  //   });
+  // }
+
   async function SubmitForm(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    // try {
-    //   const response = await api.post(
-    //     "/user/login",
-    //     data,
-    //   );
-    //   console.log("Server response:", response.data);
+  await apiTryCatch(async () => {
+    const response = await api.post("/user/login", data);
 
-    //   setData({
-    //     email: "",
-    //     password: "",
-    //   });
+    const token = response.headers.authorization.split(" ")[1];
+    localStorage.setItem("accessToken", token);
 
-    //   toast.success(response?.data?.message);
+    const { id, role } = response.data.data;
 
-    //   navigate("/homepage");
-    // } catch (err) {
-    //   console.error("Error submitting form:", err);
-    //   console.log(err?.response?.data?.message);
-    //   toast.error(err?.response?.data?.message);
-    // }
-    await apiTryCatch(async () => {
-      const response = await api.post("/user/login", data);
-      console.log("Server response:", response.data);
-      console.log(response.headers.authorization);
-      // localStorage.setItem("accessToken",response.headers.authorization)
-      const token = response.headers.authorization.split(" ")[1];
-      localStorage.setItem("accessToken", token);
-      setData({
-        email: "",
-        password: "",
-      });
-      toast.success(response?.data?.message);
-      navigate("/dashboard");
-    });
-  }
+    localStorage.setItem(
+      "userDetails",
+      JSON.stringify({ userId: id, role })
+    );
+
+    toast.success(response?.data?.message);
+    navigate("/dashboard");
+  });
+}
 
   return (
     <div className="form-container-login">

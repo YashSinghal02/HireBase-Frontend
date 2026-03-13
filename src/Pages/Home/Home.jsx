@@ -26,6 +26,7 @@ function Home() {
           const response = await api.get("/employer/jobs");
           setJobs(response.data.data);
           setFilteredJobs(response.data.data);
+          console.log("Response",response.data.data)
         });
       };
   

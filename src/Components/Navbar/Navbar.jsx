@@ -85,7 +85,7 @@ function NavBar() {
         <div className="nav-right">
 
           {/* Avatar Section */}
-          <div className="profile-wrapper" ref={profileRef}>
+          {/* <div className="profile-wrapper" ref={profileRef}>
             <div className="avatar" onClick={toggleProfileCard}>
               YS
             </div>
@@ -118,13 +118,13 @@ function NavBar() {
               </div>
               
             </div>
-          </div>
+          </div> */}
 
 {/* Autherizaions Buttons */}
-          {/* <div className="auth-buttons">
+          <div className="auth-buttons">
   <button className="btn-glass-navbar login-btn-navbar"><Link  to="/login">Login</Link></button>
   <button className="btn-glass-navbar signup-btn-navbar"><Link to="/signup">Sign Up</Link></button>
-</div> */}
+</div>
 
           <div className="bar" onClick={toggleHamburgerMenu}>
             <i className="fa-solid fa-bars"></i>

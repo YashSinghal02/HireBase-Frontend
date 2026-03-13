@@ -44,6 +44,7 @@ function EditJobForm() {
 
         const response = await api.get(`/employer/jobs/${id}`);
         const job = response.data.data;
+        console.log(job)
 
         setData({
           companyName: job.companyName || "",
