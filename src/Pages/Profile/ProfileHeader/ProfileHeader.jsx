@@ -2,11 +2,14 @@ import "./ProfileHeader.css";
 import profilebanner from '../../../assets/profilebanner.png'
 import me from '../../../assets/me.jpg'
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { api } from "@/Utils/axiosConfig";
 import { apiTryCatch } from "@/Utils/trycatch";
+import { AuthContext } from "@/AuthContext/AuthContext";
+
 
 function ProfileHeader({ refreshProfile }) {
+    const {name } = useContext(AuthContext);
    const [data, setData] = useState(null);
     
       async function getProfile() {
@@ -62,7 +65,7 @@ function ProfileHeader({ refreshProfile }) {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
         >
-          <h3>{data?.name || "N/A"}</h3>
+          <h3>{name || "User"}</h3>
           <p>{data?.occupation || "N/A"}</p>
         </motion.div>
       </div>

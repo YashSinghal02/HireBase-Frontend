@@ -188,6 +188,7 @@ function EditJobForm() {
             <label>Company Name</label>
             <input
               type="text"
+              placeholder="e.g. IBM, Google, Microsoft"
               value={data.companyName}
               onChange={(e) =>
                 setData({ ...data, companyName: e.target.value })
@@ -201,6 +202,7 @@ function EditJobForm() {
             <label>Job Title</label>
             <input
               type="text"
+              placeholder="e.g. Full Stack Developer"
               value={data.jobTitle}
               onChange={(e) =>
                 setData({ ...data, jobTitle: e.target.value })
@@ -214,6 +216,7 @@ function EditJobForm() {
             <label>Salary</label>
             <input
               type="text"
+              placeholder="Salary range (e.g. 4-5 LPA)"
               value={data.salary}
               onChange={(e) =>
                 setData({ ...data, salary: e.target.value })
@@ -227,6 +230,7 @@ function EditJobForm() {
             <label>Location</label>
             <input
               type="text"
+              placeholder="e.g. Bangalore, India"
               value={data.location}
               onChange={(e) =>
                 setData({ ...data, location: e.target.value })
@@ -247,7 +251,7 @@ function EditJobForm() {
               }
             >
 
-              <option value="">-- Select --</option>
+              <option value="">-- Select Job Type --</option>
               <option value="Full Time">Full Time</option>
               <option value="Part Time">Part Time</option>
               <option value="Internship">Internship</option>
@@ -270,7 +274,7 @@ function EditJobForm() {
               }
             >
 
-              <option value="">-- Select --</option>
+              <option value="">-- Select Experience Level --</option>
               <option value="Junior">Junior</option>
               <option value="Mid Level">Mid Level</option>
               <option value="Senior">Senior</option>
@@ -287,6 +291,7 @@ function EditJobForm() {
 
             <input
               type="number"
+              placeholder="e.g. 5"
               value={data.positions}
               onChange={(e) =>
                 setData({ ...data, positions: e.target.value })
@@ -317,6 +322,7 @@ function EditJobForm() {
             <label>Job Description</label>
 
             <textarea
+            placeholder="Describe the job role, work environment, and expectations"
               value={data.description}
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })
@@ -335,7 +341,7 @@ function EditJobForm() {
               <input
                 value={responsibilityInput}
                 onChange={(e) => setResponsibilityInput(e.target.value)}
-                placeholder="Type responsibility and press Add"
+                placeholder="Add responsibility (e.g. Develop React components)"
               />
               <button type="button" onClick={addResponsibility}>
                 Add
@@ -360,7 +366,7 @@ function EditJobForm() {
               <input
                 value={qualificationInput}
                 onChange={(e) => setQualificationInput(e.target.value)}
-                placeholder="Type qualification and press Add"
+               placeholder="e.g. B.Tech in Computer Science"
               />
               <button type="button" onClick={addQualification}>
                 Add
@@ -385,7 +391,7 @@ function EditJobForm() {
               <input
                 value={skillInput}
                 onChange={(e) => setSkillInput(e.target.value)}
-                placeholder="Type skill and press Add"
+                placeholder="e.g. React, Node.js, MongoDB"
               />
               <button type="button" onClick={addSkill}>
                 Add

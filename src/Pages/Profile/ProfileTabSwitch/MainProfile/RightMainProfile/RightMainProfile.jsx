@@ -1,11 +1,15 @@
 import "./RightMainProfile.css";
 import { FaLinkedin, FaGithub, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { api } from "@/Utils/axiosConfig";
 import { apiTryCatch } from "@/Utils/trycatch";
+import { AuthContext } from "@/AuthContext/AuthContext";
+
+
 
 function RightMainProfile({ refreshProfile }) {
+    const { email,phone } = useContext(AuthContext);
   console.log("refreshProfile:", refreshProfile);
     const [data, setData] = useState(null);
   
@@ -35,7 +39,7 @@ function RightMainProfile({ refreshProfile }) {
 
         <div className="right-main-detail-row">
           <span className="right-main-label">Email :</span>
-          <span className="right-main-value">{data?.email || "N/A"}</span>
+          <span className="right-main-value">{email || "N/A"}</span>
         </div>
 
         <div className="right-main-detail-row">
@@ -60,7 +64,7 @@ function RightMainProfile({ refreshProfile }) {
 
         <div className="right-main-detail-row">
           <span className="right-main-label">Mobile :</span>
-          <span className="right-main-value">91-123456-789</span>
+          <span className="right-main-value">{phone || "N/A"}</span>
         </div>
 
         {/* Social Row */}

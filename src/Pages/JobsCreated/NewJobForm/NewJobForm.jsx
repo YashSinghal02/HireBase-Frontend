@@ -111,9 +111,10 @@ function NewJobForm() {
         <form className="jobform-form" onSubmit={SubmitForm}>
           {/* Company Name */}
           <motion.div className="form-group">
-            <label>Company Name</label>
+            <label>Company Name <span style={{color:"#ff4141",fontSize:"15px"}}>*</span></label>
             <input
               type="text"
+              placeholder="e.g. IBM, Google, Microsoft"
               value={data.companyName}
               onChange={(e) =>
                 setData({ ...data, companyName: e.target.value })
@@ -123,29 +124,32 @@ function NewJobForm() {
 
           {/* Job Title */}
           <motion.div className="form-group">
-            <label>Job Title</label>
+            <label>Job Title <span style={{color:"#ff4141",fontSize:"15px"}}>*</span></label>
             <input
               type="text"
               value={data.jobTitle}
               onChange={(e) => setData({ ...data, jobTitle: e.target.value })}
+              placeholder="e.g. Full Stack Developer"
             />
           </motion.div>
 
           {/* Salary */}
           <motion.div className="form-group">
-            <label>Salary</label>
+            <label>Salary <span style={{color:"#ff4141",fontSize:"15px"}}>*</span></label>
             <input
               type="text"
               value={data.salary}
               onChange={(e) => setData({ ...data, salary: e.target.value })}
+              placeholder="Salary range (e.g. 4-5 LPA)"
             />
           </motion.div>
 
           {/* Location */}
           <motion.div className="form-group">
-            <label>Location</label>
+            <label>Location <span style={{color:"#ff4141",fontSize:"15px"}}>*</span></label>
             <input
               type="text"
+              placeholder="e.g. Bangalore, India"
               value={data.location}
               onChange={(e) => setData({ ...data, location: e.target.value })}
             />
@@ -153,12 +157,12 @@ function NewJobForm() {
 
           {/* Job Type */}
           <motion.div className="form-group">
-            <label>Job Type</label>
+            <label>Job Type <span style={{color:"#ff4141",fontSize:"15px"}}>*</span></label>
             <select
               value={data.jobType}
               onChange={(e) => setData({ ...data, jobType: e.target.value })}
             >
-              <option value="">-- Select --</option>
+              <option value="">-- Select Job Type--</option>
               <option value="Full Time">Full Time</option>
               <option value="Part Time">Part Time</option>
               <option value="Internship">Internship</option>
@@ -168,14 +172,14 @@ function NewJobForm() {
 
           {/* Experience */}
           <motion.div className="form-group">
-            <label>Experience Level</label>
+            <label>Experience Level <span style={{color:"#ff4141",fontSize:"15px"}}>*</span></label>
             <select
               value={data.experienceLevel}
               onChange={(e) =>
                 setData({ ...data, experienceLevel: e.target.value })
               }
             >
-              <option value="">-- Select --</option>
+              <option value="">-- Select Experience Level --</option>
               <option value="Junior">Junior</option>
               <option value="Mid Level">Mid Level</option>
               <option value="Senior">Senior</option>
@@ -184,9 +188,10 @@ function NewJobForm() {
 
           {/* Positions */}
           <motion.div className="form-group">
-            <label>No. of Positions</label>
+            <label>No. of Positions <span style={{color:"#ff4141",fontSize:"15px"}}>*</span></label>
             <input
               type="number"
+              placeholder="e.g. 5"
               value={data.positions}
               onChange={(e) => setData({ ...data, positions: e.target.value })}
             />
@@ -203,8 +208,9 @@ function NewJobForm() {
 
           {/* Job Description */}
           <motion.div className="form-group full-width">
-            <label>Job Description</label>
+            <label>Job Description <span style={{color:"#ff4141",fontSize:"15px"}}>*</span></label>
             <textarea
+            placeholder="Describe the job role, work environment, and expectations"
               value={data.description}
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })
@@ -220,7 +226,7 @@ function NewJobForm() {
               <input
                 value={responsibilityInput}
                 onChange={(e) => setResponsibilityInput(e.target.value)}
-                placeholder="Type responsibility and press Add"
+                placeholder="Add responsibility (e.g. Develop React components)"
               />
               <button type="button" onClick={addResponsibility}>
                 Add
@@ -245,7 +251,7 @@ function NewJobForm() {
               <input
                 value={qualificationInput}
                 onChange={(e) => setQualificationInput(e.target.value)}
-                placeholder="Type qualification and press Add"
+                placeholder="e.g. B.Tech in Computer Science"
               />
               <button type="button" onClick={addQualification}>
                 Add
@@ -270,7 +276,7 @@ function NewJobForm() {
               <input
                 value={skillInput}
                 onChange={(e) => setSkillInput(e.target.value)}
-                placeholder="Type skill and press Add"
+                placeholder="e.g. React, Node.js, MongoDB"
               />
               <button type="button" onClick={addSkill}>
                 Add

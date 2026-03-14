@@ -3,36 +3,40 @@ import "./EditProfileForm.css";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { apiTryCatch } from "@/Utils/trycatch";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
+import { AuthContext } from "@/AuthContext/AuthContext";
 
 function EditProfileForm({ setActiveTab, setRefreshProfile }) {
-const [educationInput, setEducationInput] = useState("");
+  const { name, email, phone } = useContext(AuthContext);
+  const { setUserDetails } = useContext(AuthContext);
+
+  const [profileId, setProfileId] = useState(null);
+
+  const [educationInput, setEducationInput] = useState("");
   const [education, setEducation] = useState([]);
 
-  // Skills state
   const [skillInput, setSkillInput] = useState("");
   const [skills, setSkills] = useState([]);
 
   const [data, setData] = useState({
-    name: "",
+    name: name || "",
+    email: email || "",
+    phone: phone || "",
     age: "",
     address: "",
     country: "",
     city: "",
     about: "",
-    // education:"",
     occupation: "",
     linkedIn: "",
     gitHub: "",
     facebook: "",
     instagram: "",
-    // profilePicture:"",
     resume: "",
   });
 
+  // ---------------- EDUCATION ----------------
 
-  // Add Education
   function addEducation() {
     if (!educationInput.trim()) return;
 
@@ -44,7 +48,8 @@ const [educationInput, setEducationInput] = useState("");
     setEducation(education.filter((_, i) => i !== index));
   }
 
-  // Add Skill
+  // ---------------- SKILLS ----------------
+
   function addSkill() {
     if (!skillInput.trim()) return;
 
@@ -56,8 +61,15 @@ const [educationInput, setEducationInput] = useState("");
     setSkills(skills.filter((_, i) => i !== index));
   }
 
+  // ---------------- UPDATE PROFILE ----------------
+
   async function SubmitForm(e) {
     e.preventDefault();
+
+    if (!profileId) {
+      toast.error("Profile not loaded");
+      return;
+    }
 
     await apiTryCatch(async () => {
       const payload = {
@@ -66,51 +78,60 @@ const [educationInput, setEducationInput] = useState("");
         skills,
       };
 
-      const response = await api.post("/profile", payload);
+      const response = await api.put(`/profile/${profileId}`, payload);
 
       toast.success(response?.data?.message);
-      // refresh profile
-      setRefreshProfile((prev) => !prev);
 
-      // switch tab
+      // update AuthContext
+      setUserDetails((prev) => ({
+        ...prev,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+      }));
+
+      setRefreshProfile((prev) => !prev);
       setActiveTab("MainProfile");
     });
   }
 
+  // ---------------- GET PROFILE ----------------
+
   async function getProfile() {
-  await apiTryCatch(async () => {
-    const response = await api.get("/profile");
+    await apiTryCatch(async () => {
+      const response = await api.get("/profile");
 
-    const profile = response?.data?.data;
-    console.log("getProfile Data:",profile)
+      const profile = response?.data?.data;
 
-    if (profile) {
-      setData({
-        
-        name: profile.name || "",
-        age: profile.age || "",
-        address: profile.address || "",
-        country: profile.country || "",
-        city: profile.city || "",
-        about: profile.about || "",
-        occupation: profile.occupation || "",
-        linkedIn: profile.linkedIn || "",
-        gitHub: profile.gitHub || "",
-        facebook: profile.facebook || "",
-        instagram: profile.instagram || "",
-        resume: profile.resume || ""
-      });
-      
-      setEducation(profile.education || []);
-      setSkills(profile.skills || []);
+      if (profile) {
+        setProfileId(profile._id);
 
-    }
-  });
-}
+        setData({
+          name: profile.userId?.name || "",
+          email: profile.userId?.email || "",
+          phone: profile.userId?.phone || "",
+          age: profile.age || "",
+          address: profile.address || "",
+          country: profile.country || "",
+          city: profile.city || "",
+          about: profile.about || "",
+          occupation: profile.occupation || "",
+          linkedIn: profile.linkedIn || "",
+          gitHub: profile.gitHub || "",
+          facebook: profile.facebook || "",
+          instagram: profile.instagram || "",
+          resume: profile.resume || "",
+        });
 
-useEffect(() => {
-  getProfile();
-}, []);
+        setEducation(profile.education || []);
+        setSkills(profile.skills || []);
+      }
+    });
+  }
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <motion.div
@@ -120,201 +141,121 @@ useEffect(() => {
       transition={{ duration: 0.7 }}
       viewport={{ once: true }}
     >
-      {/* ================= Personal Details Form ================= */}
       <form className="edit-profile-form-section" onSubmit={SubmitForm}>
-        {/* Section Title */}
         <h2 className="edit-profile-form-title">Personal Details</h2>
-
-        {/* Grid Fields */}
         <div className="edit-profile-form-grid">
-          <motion.div
-            className="edit-profile-form-field"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="name">Full Name</label>
+          <div className="edit-profile-form-field">
+            <label>Full Name</label>
             <input
               type="text"
-              name="name"
-              placeholder="Enter full name"
               value={data.name}
               onChange={(e) => setData({ ...data, name: e.target.value })}
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="edit-profile-form-field"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="age">Age</label>
+          <div className="edit-profile-form-field">
+            <label>Age</label>
             <input
               type="number"
-              name="age"
-              placeholder="Enter age"
               value={data.age}
               onChange={(e) => setData({ ...data, age: e.target.value })}
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="edit-profile-form-field"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="address">Address</label>
+          <div className="edit-profile-form-field">
+            <label>Address</label>
             <input
               type="text"
-              name="address"
-              placeholder="Enter address"
               value={data.address}
               onChange={(e) => setData({ ...data, address: e.target.value })}
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="edit-profile-form-field"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="country">Country</label>
+          <div className="edit-profile-form-field">
+            <label>Country</label>
             <input
               type="text"
-              name="country"
-              placeholder="Enter country"
               value={data.country}
               onChange={(e) => setData({ ...data, country: e.target.value })}
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="edit-profile-form-field"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="city">City</label>
+          <div className="edit-profile-form-field">
+            <label>City</label>
             <input
               type="text"
-              name="city"
-              placeholder="Enter city"
               value={data.city}
               onChange={(e) => setData({ ...data, city: e.target.value })}
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="edit-profile-form-field"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div className="edit-profile-form-field">
             <label>Mobile No</label>
             <input
               type="text"
-              name="mobile"
-              placeholder="Enter mobile number"
+              value={data.phone}
+              onChange={(e) => setData({ ...data, phone: e.target.value })}
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="edit-profile-form-field"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div className="edit-profile-form-field">
             <label>Email</label>
-            <input type="email" name="email" placeholder="Enter email" />
-          </motion.div>
+            <input
+              type="email"
+              value={data.email}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+            />
+          </div>
 
-          <motion.div
-            className="edit-profile-form-field"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="occupation">Occupation</label>
+          <div className="edit-profile-form-field">
+            <label>Occupation</label>
             <input
               type="text"
-              name="occupation"
-              placeholder="Enter occupation"
               value={data.occupation}
               onChange={(e) => setData({ ...data, occupation: e.target.value })}
             />
-          </motion.div>
+          </div>
         </div>
-
-        {/* About Field */}
-        <motion.div
-          className="edit-profile-form-field edit-profile-form-full"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-        >
-          <label htmlFor="about">About</label>
+        {/* ABOUT */}
+        <div className="edit-profile-form-field edit-profile-form-full">
+          <label>About</label>
           <textarea
-            name="about"
             rows="5"
-            placeholder="Write about yourself"
             value={data.about}
             onChange={(e) => setData({ ...data, about: e.target.value })}
-          ></textarea>
-        </motion.div>
-
-       
-        {/* ================= Education Form ================= */}
+          />
+        </div>
+        {/* EDUCATION */}
         <div className="edit-profile-form-section">
           <h2 className="edit-profile-form-title">Education</h2>
 
-          <motion.div
-            className="edit-profile-form-field edit-profile-form-full"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <label>Education</label>
-            <div className="tag-input">
-              <input
-                value={educationInput}
-                onChange={(e) => setEducationInput(e.target.value)}
-                placeholder="Type Education and press Add"
-              />
-              <button type="button" onClick={addEducation}>
-                Add
-              </button>
-            </div>
+          <div className="tag-input">
+            <input
+            className="education-input"
+              value={educationInput}
+              onChange={(e) => setEducationInput(e.target.value)}
+              placeholder="Add education"
+            />
+            <button type="button" onClick={addEducation}>
+              Add
+            </button>
+          </div>
 
-            <div className="tag-container-job-form">
-              {education.map((item, index) => (
-                <div key={index} className="tag-job-form">
-                  {item}
-                  <span onClick={() => deleteEducation(index)}>✕</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          <div className="tag-container-job-form">
+            {education.map((item, index) => (
+              <div key={index} className="tag-job-form">
+                {item}
+                <span onClick={() => deleteEducation(index)}>✕</span>
+              </div>
+            ))}
+          </div>
         </div>
-
-
-        {/* ================= Social Networks Form ================= */}
+        {/* ================= Social Networks Form ================= */}{" "}
         <div className="edit-profile-form-section">
-          <h2 className="edit-profile-form-title">Social Networks</h2>
-
+          {" "}
+          <h2 className="edit-profile-form-title">Social Networks</h2>{" "}
           <div className="edit-profile-form-grid">
+            {" "}
             <motion.div
               className="edit-profile-form-field"
               initial={{ opacity: 0, x: -40 }}
@@ -322,16 +263,16 @@ useEffect(() => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <label htmlFor="linkedIn">LinkedIn</label>
+              {" "}
+              <label htmlFor="linkedIn">LinkedIn</label>{" "}
               <input
                 type="text"
                 name="linkedin"
                 placeholder="LinkedIn profile link"
                 value={data.linkedIn}
                 onChange={(e) => setData({ ...data, linkedIn: e.target.value })}
-              />
-            </motion.div>
-
+              />{" "}
+            </motion.div>{" "}
             <motion.div
               className="edit-profile-form-field"
               initial={{ opacity: 0, x: 40 }}
@@ -339,16 +280,16 @@ useEffect(() => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <label htmlFor="gitHub">GitHub</label>
+              {" "}
+              <label htmlFor="gitHub">GitHub</label>{" "}
               <input
                 type="text"
                 name="github"
                 placeholder="GitHub profile link"
                 value={data.gitHub}
                 onChange={(e) => setData({ ...data, gitHub: e.target.value })}
-              />
-            </motion.div>
-
+              />{" "}
+            </motion.div>{" "}
             <motion.div
               className="edit-profile-form-field"
               initial={{ opacity: 0, x: -40 }}
@@ -356,7 +297,8 @@ useEffect(() => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <label>Instagram</label>
+              {" "}
+              <label>Instagram</label>{" "}
               <input
                 type="text"
                 name="instagram"
@@ -365,9 +307,8 @@ useEffect(() => {
                 onChange={(e) =>
                   setData({ ...data, instagram: e.target.value })
                 }
-              />
-            </motion.div>
-
+              />{" "}
+            </motion.div>{" "}
             <motion.div
               className="edit-profile-form-field"
               initial={{ opacity: 0, x: 40 }}
@@ -375,53 +316,44 @@ useEffect(() => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <label>Facebook</label>
+              {" "}
+              <label>Facebook</label>{" "}
               <input
                 type="text"
                 name="facebook"
                 placeholder="Facebook profile link"
                 value={data.facebook}
                 onChange={(e) => setData({ ...data, facebook: e.target.value })}
-              />
-            </motion.div>
-          </div>
+              />{" "}
+            </motion.div>{" "}
+          </div>{" "}
         </div>
-
-        {/* ================= Skills Form ================= */}
+        {/* SKILLS */}
         <div className="edit-profile-form-section">
           <h2 className="edit-profile-form-title">Skills</h2>
 
-          <motion.div
-            className="edit-profile-form-field edit-profile-form-full"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <label>Skills</label>
-            <div className="tag-input">
-              <input
-                value={skillInput}
-                onChange={(e) => setSkillInput(e.target.value)}
-                placeholder="Type skill and press Add"
-              />
-              <button type="button" onClick={addSkill}>
-                Add
-              </button>
-            </div>
+          <div className="tag-input">
+            <input
+            className="education-input"
+              value={skillInput}
+              onChange={(e) => setSkillInput(e.target.value)}
+              placeholder="Add skill"
+            />
+            <button type="button" onClick={addSkill}>
+              Add
+            </button>
+          </div>
 
-            <div className="tag-container-job-form-skills">
-              {skills.map((item, index) => (
-                <div key={index} className="tag-job-form-skills">
-                  {item}
-                  <span onClick={() => deleteSkill(index)}>✕</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          <div className="tag-container-job-form-skills">
+            {skills.map((item, index) => (
+              <div key={index} className="tag-job-form-skills">
+                {item}
+                <span onClick={() => deleteSkill(index)}>✕</span>
+              </div>
+            ))}
+          </div>
         </div>
-
-        {/* Submit */}
+        {/* SUBMIT */}
         <button type="submit" className="edit-profile-form-button">
           Update Profile
         </button>

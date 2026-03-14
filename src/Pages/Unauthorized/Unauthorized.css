@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 
-/* ===============================
-   BACKGROUND
-================================ */
+/* BACKGROUND */
 
 .background-unauthorized {
   position: relative;
@@ -21,9 +19,7 @@
   box-sizing: border-box;
 }
 
-/* ===============================
-   404 SECTION
-================================ */
+/* 403 SECTION */
 
 .unauthorized-main-txt {
   text-align: center;
@@ -33,17 +29,19 @@
 }
 
 .unauthorized-main-txt h1 {
-  font-size: 31rem;
+  font-size: 27rem;
   font-weight: 800;
   letter-spacing: -6px;
   opacity: 0.9;
-  font-family: "Manrope", sans-serif !important;
   margin: 0;
+
+  text-shadow:
+    0 0 30px rgba(255,255,255,0.2),
+    0 10px 40px rgba(0,0,0,0.3);
+    font-family: "Manrope", sans-serif;
 }
 
-/* ===============================
-   MONSTER
-================================ */
+/* MONSTER */
 
 .unauthorized-video {
   position: absolute;
@@ -61,32 +59,26 @@
   filter: drop-shadow(0 20px 25px rgba(0,0,0,0.25));
 }
 
-/* ===============================
-   TEXT
-================================ */
+/* TEXT */
 
 .unauthorized-txt {
   text-align: center;
-  margin-top: 49px;
+  margin-top: 37px;
   z-index: 3;
 }
 
 .unauthorized-txt h3 {
-  font-size: 3rem;
-  font-weight: 600;
-  margin-top: 0;
+  font-size: 2.7rem;
+  font-weight: 700;
 }
 
 .unauthorized-txt h5 {
   font-size: 1.25rem;
   font-weight: 400;
   opacity: 0.9;
-  margin: 0;
 }
 
-/* ===============================
-   BUTTON
-================================ */
+/* BUTTON */
 
 .unauthorized-btn {
   margin: 15px 0;
@@ -118,114 +110,77 @@
 }
 
 .unauthorized-btn button:hover {
-  transform: translateY(-1px);
-  background-color: #388d6a;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  transform: translateY(-3px) scale(1.03);
+  background-color: #3d9871;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
 }
 
 .back-unauthorized {
   font-size: 22px;
 }
 
-/* ===============================
-   STATIC CLOUDS
-================================ */
+/* CLOUDS */
+
+@keyframes cloudMove {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+  100% { transform: translateX(0); }
+}
+
+.clouds-bg-img1,
+.clouds-bg-img2,
+.clouds-bg-img3 {
+  animation: cloudMove 12s ease-in-out infinite;
+}
+
+/* CLOUD POSITIONS */
 
 .clouds-bg-img1 {
   position: absolute;
-
   top: 80px;
   left: 0px;
-
   width: 420px;
   height: 220px;
-
   background-image: url("../../assets/cloud2.png");
   background-repeat: no-repeat;
   background-size: contain;
-
   opacity: 0.35;
-
   z-index: 1;
-
   filter: brightness(0.95) contrast(1.1) blur(1px);
-
-  pointer-events: none;
 }
 
 .clouds-bg-img2 {
   position: absolute;
-
   top: 140px;
   right: 20px;
-
   width: 450px;
   height: 240px;
-
   background-image: url("../../assets/cloud2.png");
   background-repeat: no-repeat;
   background-size: contain;
-
   opacity: 0.35;
-
   z-index: 1;
-
-  filter: brightness(0.95) contrast(1.1) blur(1px);
-
-  pointer-events: none;
 }
 
 .clouds-bg-img3 {
   position: absolute;
-
   top: 10px;
   right: 550px;
-
   width: 450px;
   height: 240px;
-
   background-image: url("../../assets/cloud2.png");
   background-repeat: no-repeat;
   background-size: contain;
-
   opacity: 0.7;
-
-  z-index:1;
-
-  filter: brightness(1) contrast(1.1) blur(1px);
-
-  pointer-events: none;
+  z-index: 1;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
-
-@media (max-width: 1200px) {
-
-  .unauthorized-main-txt h1 {
-    font-size: 26rem;
-  }
-
-  .unauthorized-video {
-    width: 85%;
-  }
-
-}
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
 
   .unauthorized-main-txt h1 {
     font-size: 16.8rem;
-    letter-spacing: -4px;
-  }
-
-  .unauthorized-video {
-    width: 95%;
-  }
-
-  .unauthorized-txt {
-    margin-top: 46px;
   }
 
   .unauthorized-txt h3 {
@@ -234,39 +189,6 @@
 
   .unauthorized-txt h5 {
     font-size: 1rem;
-  }
-
-  .clouds-bg-img1 {
-    width: 300px;
-    top: 40px;
-    left: 20px;
-  }
-
-  .clouds-bg-img2 {
-    width: 320px;
-    top: 100px;
-    right: 20px;
-  }
-
-}
-
-@media (max-width: 480px) {
-
-  .unauthorized-main-txt h1 {
-    font-size: 14rem;
-    letter-spacing: -3px;
-  }
-
-  .unauthorized-txt h3 {
-    font-size: 1.6rem;
-  }
-
-  .clouds-bg-img1 {
-    width: 220px;
-  }
-
-  .clouds-bg-img2 {
-    width: 230px;
   }
 
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./JobDetails.css";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaRegBookmark } from "react-icons/fa";
@@ -10,11 +10,13 @@ import { useParams } from "react-router-dom";
 import { FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import toast from "react-hot-toast";
+import { AuthContext } from '@/AuthContext/AuthContext';
+
 
 
 
 function JobDetails() {
-
+ const { role } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -117,8 +119,24 @@ function JobDetails() {
 
         {/* Bottom Buttons */}
         <div className="jobDetails-buttons">
-          <button className="save-btn" onClick={() => handleSave(data._id)}>Save</button>
-          <button className="apply-btn-main" onClick={() => handleApply(data._id)}>Apply Now</button>
+           {role==="employee" && (
+              <button
+                className="save-btn"
+                onClick={() => handleApply(data._id)}
+              >
+                Save
+              </button>
+            )}
+          {/* <button className="save-btn" onClick={() => handleSave(data._id)}>Save</button> */}
+          {/* <button className="apply-btn-main" onClick={() => handleApply(data._id)}>Apply Now</button> */}
+          {role==="employee" && (
+              <button
+                className="apply-btn-main"
+                onClick={() => handleApply(data._id)}
+              >
+                Apply Now
+              </button>
+            )}
          </div>
 
         </div>

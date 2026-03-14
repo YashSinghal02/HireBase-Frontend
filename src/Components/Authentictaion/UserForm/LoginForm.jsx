@@ -46,12 +46,13 @@ function LoginForm() {
     const token = response.headers.authorization.split(" ")[1];
     localStorage.setItem("accessToken", token);
 
-    const { id, role } = response.data.data;
+    const { id, role, name, email,phone } = response.data.data;
 
     localStorage.setItem(
       "userDetails",
-      JSON.stringify({ userId: id, role })
+      JSON.stringify({ userId: id, role, name, email,phone })
     );
+    console.log("Login response:", response.data.data);
 
     toast.success(response?.data?.message);
     navigate("/dashboard");

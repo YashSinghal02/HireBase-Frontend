@@ -7,7 +7,7 @@
 /* ================= DESKTOP ================= */
 .combine-main-profiles {
   display: grid;
-  grid-template-columns: 65% 35%; /* better balance */
+  grid-template-columns: 60% 40%; /* better balance */
   gap: 50px;
   padding: 50px 60px;
   max-width: 1400px;

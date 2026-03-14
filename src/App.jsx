@@ -34,6 +34,7 @@ import ProtectedRoutes from "./Utils/ProtectedRoutes";
 import Admin from "./Pages/Admin/Admin";
 import Unauthorized from "./Pages/Unauthorized/Unauthorized";
 import EditCompany from "./Pages/Companies/EditCompany/EditCompany";
+import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 
 
 
@@ -58,6 +59,7 @@ function App() {
        <Route path="/signup" element={<SignUpForm/>} />
         <Route path="/otp" element={<OTPSignup/>} />
   <Route path="/unauthorized" element={<Unauthorized/>} />
+   <Route path="*" element={<PageNotFound/>} />
 
         {/* Admin */}
         <Route path="/admin" element={
@@ -68,23 +70,59 @@ function App() {
 
 
         {/* Profile */}
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile" element={
+          <ProtectedRoutes allowedRoles={["admin","employee","employer"]}>            
+            <Profile/>
+          </ProtectedRoutes>
+        } />
       {/* Dashboard Section */}
       <Route path="/dashboard" element={<DashboardLayout />}>
       {/* Empolyee */}
         <Route index element={<Jobs />} />
-        <Route path="jobs" element={<Jobs />} />
+        <Route path="jobs" element={
+          <ProtectedRoutes allowedRoles={["admin","employee","employer"]}>            
+           <Jobs />
+          </ProtectedRoutes>
+        } />
          <Route path="details/:id" element={<JobDetails/>} />
-         <Route path="saved" element={<Savedjobs/>} />
-          <Route path="applied" element={<AppliedJobs/>} />
+         <Route path="saved" element={
+          <ProtectedRoutes allowedRoles={["admin","employee"]}>            
+           <Savedjobs/>
+          </ProtectedRoutes>
+         } />
+          <Route path="applied" element={
+            <ProtectedRoutes allowedRoles={["admin","employee"]}>            
+            <AppliedJobs/>
+          </ProtectedRoutes>
+          } />
           {/* Empolyer */}
-          <Route path="companies" element={<Companies/>} />
-          <Route path="newcompany" element={<CompanyForm/>} />
-          <Route path="companyedit/:id" element={<EditCompany/>} />
-          <Route path="jobscreated" element={<JobsCreated/>} />
-          <Route path="jobsedit/:id" element={<EditJobForm/>} />
-           <Route path="jobsform" element={<NewJobForm/>} />
-           <Route path="settings" element={<Settings/>} />
+          <Route path="companies" element={
+            <ProtectedRoutes allowedRoles={["admin","employer"]}>            
+            <Companies/>
+          </ProtectedRoutes>
+          } />
+          <Route path="newcompany" element={
+            <ProtectedRoutes allowedRoles={["admin","employer"]}>            
+            <CompanyForm/>
+          </ProtectedRoutes>
+          } />
+          <Route path="companyedit/:id" element={
+            <ProtectedRoutes allowedRoles={["admin","employer"]}>            
+            <EditCompany/>
+          </ProtectedRoutes>
+          } />
+          <Route path="jobscreated" element={<ProtectedRoutes allowedRoles={["admin","employer"]}>            
+           <JobsCreated/>
+          </ProtectedRoutes>} />
+          <Route path="jobsedit/:id" element={<ProtectedRoutes allowedRoles={["admin","employer"]}>            
+            <EditJobForm/>
+          </ProtectedRoutes>} />
+           <Route path="jobsform" element={<ProtectedRoutes allowedRoles={["admin","employer"]}>            
+            <NewJobForm/>
+          </ProtectedRoutes>} />
+           <Route path="settings" element={<ProtectedRoutes allowedRoles={["admin","employer","employee"]}>            
+           <Settings/>
+          </ProtectedRoutes>} />
       </Route>
 
     </Route>
