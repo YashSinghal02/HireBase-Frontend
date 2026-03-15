@@ -5,9 +5,10 @@
 }
 
 /* ================= DESKTOP ================= */
+
 .combine-main-profiles {
   display: grid;
-  grid-template-columns: 60% 40%; /* better balance */
+  grid-template-columns: 60% 40%;
   gap: 50px;
   padding: 50px 60px;
   max-width: 1400px;
@@ -15,7 +16,14 @@
   align-items: start;
 }
 
+/* MAKE CURRENT OPENINGS FULL WIDTH */
+
+.company-current-openings {
+  grid-column: 1 / -1;
+}
+
 /* ================= LARGE LAPTOP ================= */
+
 @media (max-width: 1200px) {
   .combine-main-profiles {
     grid-template-columns: 60% 40%;
@@ -24,15 +32,21 @@
 }
 
 /* ================= TABLET ================= */
+
 @media (max-width: 992px) {
   .combine-main-profiles {
     grid-template-columns: 1fr;
     padding: 30px 25px;
     gap: 40px;
   }
+
+  .company-current-openings {
+    grid-column: auto;
+  }
 }
 
-/* ================= LARGE MOBILE ================= */
+/* ================= MOBILE ================= */
+
 @media (max-width: 768px) {
   .combine-main-profiles {
     padding: 25px 18px;
@@ -40,6 +54,7 @@
 }
 
 /* ================= SMALL MOBILE ================= */
+
 @media (max-width: 480px) {
   .combine-main-profiles {
     padding: 20px 14px;

@@ -1,0 +1,141 @@
+.left-company-main-profile{
+display:flex;
+flex-direction:column;
+gap:40px;
+width:100%;
+}
+
+/* TITLE */
+
+.left-company-main-title{
+font-size:26px;
+font-weight:700;
+margin-bottom:16px;
+color:#3DAA7D;
+}
+
+/* CARD */
+
+.left-company-main-card{
+background:#121b1a;
+border:1px solid rgba(61,170,125,0.25);
+border-radius:18px;
+padding:26px;
+color:#d1d5db;
+line-height:1.7;
+}
+
+
+/* COMPANY STATS */
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.stat-box{
+background:#0f1514;
+border:1px solid rgba(61,170,125,0.25);
+padding:20px;
+border-radius:12px;
+text-align:center;
+}
+
+.stat-box h3{
+color:#3DAA7D;
+font-size:24px;
+margin-bottom:5px;
+}
+
+.stat-box p{
+font-size:14px;
+color:#b6c2bd;
+}
+
+
+/* TABLE */
+
+.company-table{
+border-radius:10px;
+overflow:hidden;
+border:1px solid #1e2a28;
+}
+
+.company-table-head{
+display:grid;
+grid-template-columns:1.3fr 1fr 1fr 1fr 0.7fr;
+padding:16px 20px;
+font-weight:600;
+border-bottom:1px solid #1e2a28;
+color:#3DAA7D;
+}
+
+.company-row{
+display:grid;
+grid-template-columns:1.3fr 1fr 1fr 1fr 0.7fr;
+padding:16px 20px;
+align-items:center;
+border-bottom:1px solid #1a2322;
+color:#e6f5ef;
+transition:0.3s;
+}
+
+.company-row:hover{
+background:#182220;
+}
+
+.location-col{
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.action-col{
+display:flex;
+gap:10px;
+}
+
+.action-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+width:34px;
+height:34px;
+border-radius:8px;
+cursor:pointer;
+background:#182220;
+}
+
+.edit-btn{
+color:#3DAA7D;
+background:rgba(61,170,125,0.12);
+}
+
+.delete-btn{
+color:#ff4d4d;
+background:rgba(255,77,77,0.15);
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.stats-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.company-table-head{
+display:none;
+}
+
+.company-row{
+grid-template-columns:1fr;
+gap:10px;
+background:#121a19;
+border-radius:10px;
+margin-bottom:12px;
+}
+
+}

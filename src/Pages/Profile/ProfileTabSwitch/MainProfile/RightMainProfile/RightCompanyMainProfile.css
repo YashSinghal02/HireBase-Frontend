@@ -1,0 +1,151 @@
+.right-company-main-wrapper{
+display:flex;
+flex-direction:column;
+gap:35px;
+width:100%;
+}
+
+/* CARD */
+
+.right-company-main-profile{
+background:#121b1a;
+border:1px solid rgba(61,170,125,0.25);
+border-radius:18px;
+padding:26px;
+color:#d1d5db;
+line-height:1.7;
+}
+
+/* TITLE */
+
+.right-company-main-heading{
+font-size:22px;
+font-weight:700;
+margin-bottom:18px;
+color:#3DAA7D;
+}
+
+/* TEXT */
+
+.right-company-main-text{
+margin-bottom:18px;
+color:#cbd5d1;
+font-size:14px;
+line-height:1.7;
+}
+
+/* DETAILS ROW */
+
+.right-company-main-detail-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:14px;
+border-bottom:1px solid #1e2a28;
+padding-bottom:10px;
+}
+
+/* LABEL */
+
+.right-main-label{
+color:#9aa6a2;
+font-size:14px;
+}
+
+/* VALUE */
+
+.right-main-value{
+color:#e6f5ef;
+font-weight:500;
+font-size:14px;
+}
+
+/* SOCIAL */
+
+.right-main-social-icons{
+display:flex;
+gap:10px;
+}
+
+.right-main-social-icons span{
+display:flex;
+align-items:center;
+justify-content:center;
+width:32px;
+height:32px;
+border-radius:8px;
+background:#182220;
+color:#3DAA7D;
+cursor:pointer;
+transition:0.3s;
+}
+
+.right-main-social-icons span:hover{
+background:#3DAA7D;
+color:#0f1514;
+}
+
+/* LOCATION */
+
+.right-company-main-detail-row-location{
+margin-bottom:16px;
+padding-bottom:14px;
+border-bottom:1px solid #1e2a28;
+}
+
+.right-company-main-detail-row-location h3{
+font-size:16px;
+color:white;
+margin-bottom:3px;
+}
+
+.right-company-main-detail-row-location h5{
+font-size:14px;
+color:#3DAA7D;
+margin-bottom:4px;
+}
+
+.right-company-main-detail-row-location p{
+font-size:13px;
+color:#9aa6a2;
+}
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.right-company-main-heading{
+font-size:20px;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.right-company-main-profile{
+padding:20px;
+}
+
+.right-company-main-detail-row{
+flex-direction:column;
+align-items:flex-start;
+gap:4px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.right-company-main-heading{
+font-size:18px;
+}
+
+.right-company-main-text{
+font-size:13px;
+}
+
+}
