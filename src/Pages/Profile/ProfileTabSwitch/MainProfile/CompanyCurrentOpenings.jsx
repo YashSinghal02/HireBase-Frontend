@@ -7,6 +7,8 @@ import { toast } from "react-hot-toast";
 import { AuthContext } from "@/AuthContext/AuthContext";
 import { api } from "@/Utils/axiosConfig";
 import { apiTryCatch } from "@/Utils/trycatch";
+import { Link } from "react-router-dom";
+
 // apiTryCatch
 // import "./CompanyCurrentOpenings.css";
 
@@ -18,21 +20,18 @@ function CompanyCurrentOpenings() {
   // Fetch jobs from API
   async function getJobs() {
     await apiTryCatch(async () => {
-      const response = await api.get(`/employer/getjobs/${userId}`);
+      const response = await api.get(`/user/getjobs/${userId}`);
       setJobs(response.data.data.createdJobs || []);
       setFilteredJobs(response.data.data.createdJobs || []);
     });
   }
 
   // Delete job
-  async function deleteJob(id) {
-    const confirmDelete = window.confirm("Are you sure you want to delete this job?");
-    if (!confirmDelete) return;
-
+ async function deleteCard(id) {
     await apiTryCatch(async () => {
       const response = await api.delete(`/employer/jobs/${id}`);
-      toast.success(response?.data?.message || "Job deleted successfully!");
-      getJobs(); // refresh list
+      toast.success(response?.data?.message);
+      getJobs();
     });
   }
 
@@ -74,7 +73,7 @@ function CompanyCurrentOpenings() {
           <div className="company-table">
             <div className="company-table-head">
               <span>Job Title</span>
-              <span>Category</span>
+              <span>Company</span>
               <span>Salary</span>
               <span>Location</span>
               <span>Action</span>
@@ -82,19 +81,21 @@ function CompanyCurrentOpenings() {
 
             {filteredJobs.map((job) => (
               <div key={job._id} className="company-row">
-                <div>{job.title}</div>
-                <div>{job.category}</div>
+                <div>{job.jobTitle}</div>
+                <div>{job.companyName}</div>
                 <div>{job.salary}</div>
                 <div className="location-col">
                   <IoLocationOutline /> {job.location}
                 </div>
                 <div className="action-col">
+                    <Link to={`/dashboard/jobsedit/${job._id}`}>
                   <div className="action-btn edit-btn">
                     <MdEdit size={18} />
                   </div>
+                  </Link>
                   <div
                     className="action-btn delete-btn"
-                    onClick={() => deleteJob(job._id)}
+                    onClick={() => deleteCard(job._id)}
                   >
                     <MdDelete size={18} />
                   </div>
