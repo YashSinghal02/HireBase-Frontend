@@ -9,7 +9,7 @@ import { AuthContext } from "@/AuthContext/AuthContext";
 
 
 function ProfileHeader({ refreshProfile }) {
-    const {name } = useContext(AuthContext);
+    const {name,role } = useContext(AuthContext);
    const [data, setData] = useState(null);
     
       async function getProfile() {
@@ -66,8 +66,11 @@ function ProfileHeader({ refreshProfile }) {
             viewport={{ once: true }}
         >
           <h3>{name || "User"}</h3>
-          <p>{data?.occupation || "N/A"}</p>
-        </motion.div>
+<p>
+  {role === "employee"
+    ? data?.occupation || "N/A"
+    : "Recruiter"}
+</p>        </motion.div>
       </div>
     </div>
   );

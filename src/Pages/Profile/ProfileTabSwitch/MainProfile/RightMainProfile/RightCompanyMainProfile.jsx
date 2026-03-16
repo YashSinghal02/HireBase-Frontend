@@ -1,8 +1,33 @@
 import "./RightCompanyMainProfile.css";
 import { motion } from "framer-motion";
-import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
+import { FaLinkedin, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
+import { useState, useEffect, useContext } from "react";
+import { api } from "@/Utils/axiosConfig";
+import { apiTryCatch } from "@/Utils/trycatch";
+import { AuthContext } from "@/AuthContext/AuthContext";
 
-function RightCompanyMainProfile() {
+function RightCompanyMainProfile({ refreshProfile }) {
+
+  const { email, phone } = useContext(AuthContext);
+
+  const [data, setData] = useState(null);
+
+  async function getProfile() {
+    await apiTryCatch(async () => {
+
+      const response = await api.get("/company-profile");
+
+      const profile = response?.data?.data;
+
+      setData(profile);
+
+    });
+  }
+
+  useEffect(() => {
+    getProfile();
+  }, [refreshProfile]);
+
   return (
     <div className="right-company-main-wrapper">
 
@@ -14,32 +39,85 @@ function RightCompanyMainProfile() {
         transition={{ duration: 0.4 }}
         viewport={{ once: true }}
       >
-        <h2 className="right-company-main-heading">Company Overview</h2>
+
+        <h2 className="right-company-main-heading">
+          Company Overview
+        </h2>
 
         <p className="right-company-main-text">
-          We build modern digital platforms and scalable web applications for
-          startups and enterprises worldwide. Our focus is on innovation,
-          product engineering, and delivering high-performance technology
-          solutions.
+          {data?.companyOverview || "No overview added yet."}
         </p>
 
         <div className="right-company-main-detail-row">
           <span className="right-main-label">Website</span>
-          <span className="right-main-value">www.company.com</span>
+
+          <span className="right-main-value">
+            {data?.website ? (
+              <a href={data.website} target="_blank" rel="noreferrer">
+                {data.website}
+              </a>
+            ) : (
+              "N/A"
+            )}
+          </span>
         </div>
 
         <div className="right-company-main-detail-row">
           <span className="right-main-label">Email</span>
-          <span className="right-main-value">hirebase@gmail.com</span>
+          <span className="right-main-value">
+            {email || "N/A"}
+          </span>
         </div>
+
+        <div className="right-company-main-detail-row">
+          <span className="right-main-label">Phone</span>
+          <span className="right-main-value">
+            {phone || "N/A"}
+          </span>
+        </div>
+
+        {/* SOCIAL LINKS */}
 
         <div className="right-company-main-detail-row">
           <span className="right-main-label">Social</span>
 
           <div className="right-main-social-icons">
-            <span><FaLinkedin /></span>
-            <span><FaGithub /></span>
-            <span><FaInstagram /></span>
+
+        <a
+  href={data?.linkedin || "#"}
+  target={data?.linkedin ? "_blank" : "_self"}
+  rel="noreferrer"
+  onClick={(e) => !data?.linkedin && e.preventDefault()}
+>
+  <FaLinkedin />
+</a>
+
+<a
+  href={data?.twitter || "#"}
+  target={data?.twitter ? "_blank" : "_self"}
+  rel="noreferrer"
+  onClick={(e) => !data?.twitter && e.preventDefault()}
+>
+  <FaTwitter />
+</a>
+
+<a
+  href={data?.facebook || "#"}
+  target={data?.facebook ? "_blank" : "_self"}
+  rel="noreferrer"
+  onClick={(e) => !data?.facebook && e.preventDefault()}
+>
+  <FaFacebook />
+</a>
+
+<a
+  href={data?.instagram || "#"}
+  target={data?.instagram ? "_blank" : "_self"}
+  rel="noreferrer"
+  onClick={(e) => !data?.instagram && e.preventDefault()}
+>
+  <FaInstagram />
+</a>
           </div>
         </div>
 
@@ -47,6 +125,7 @@ function RightCompanyMainProfile() {
 
 
       {/* GLOBAL OFFICES */}
+
       <motion.div
         className="right-company-main-profile"
         initial={{ opacity: 0, x: 30 }}
@@ -54,24 +133,19 @@ function RightCompanyMainProfile() {
         transition={{ duration: 0.4 }}
         viewport={{ once: true }}
       >
-        <h2 className="right-company-main-heading">Global Offices</h2>
+
+        <h2 className="right-company-main-heading">
+          Global Offices
+        </h2>
 
         <div className="right-company-main-detail-row-location">
-          <h3>Canada Office</h3>
-          <h5>Toronto</h5>
-          <p>127 Downtown Street</p>
-        </div>
 
-        <div className="right-company-main-detail-row-location">
-          <h3>Australia Office</h3>
-          <h5>Sydney</h5>
-          <p>22 Business Avenue</p>
-        </div>
+          <h3>{data?.companyName || "Company"}</h3>
 
-        <div className="right-company-main-detail-row-location">
-          <h3>United Kingdom Office</h3>
-          <h5>London</h5>
-          <p>45 Tech Park Road</p>
+          <h5>{data?.offices || "Location not added"}</h5>
+
+          <p>Main Office</p>
+
         </div>
 
       </motion.div>

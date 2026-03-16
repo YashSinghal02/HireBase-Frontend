@@ -67,7 +67,7 @@ display:flex;
 gap:10px;
 }
 
-.right-main-social-icons span{
+.right-main-social-icons a{
 display:flex;
 align-items:center;
 justify-content:center;
@@ -80,7 +80,7 @@ cursor:pointer;
 transition:0.3s;
 }
 
-.right-main-social-icons span:hover{
+.right-main-social-icons a:hover{
 background:#3DAA7D;
 color:#0f1514;
 }

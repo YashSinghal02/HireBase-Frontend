@@ -11,6 +11,7 @@ import { useState,useEffect } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import NoPageFound from "../../assets/NoPageFound.png"
+import { IoLocationOutline } from "react-icons/io5";
 
 
 function CompanyCreate({ jobs,deleteCard }) {
@@ -39,6 +40,7 @@ function CompanyCreate({ jobs,deleteCard }) {
         <span>Logo</span>
         <span>Name</span>
         <span>Date</span>
+        <span>Location</span>
         <span>Action</span>
       </div>
 
@@ -51,6 +53,9 @@ function CompanyCreate({ jobs,deleteCard }) {
           </div>
           <div>{company.companyName}</div>
           <div>{created}</div>
+          <div className="location-col">
+                            <IoLocationOutline /> {company.location}
+                          </div>
          <div className="action-col">
           <Link to={`/dashboard/companyedit/${company._id}`}>
   <div className="action-btn edit-btn">

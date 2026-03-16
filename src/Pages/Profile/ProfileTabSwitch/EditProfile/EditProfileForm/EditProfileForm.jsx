@@ -66,10 +66,6 @@ function EditProfileForm({ setActiveTab, setRefreshProfile }) {
   async function SubmitForm(e) {
     e.preventDefault();
 
-    if (!profileId) {
-      toast.error("Profile not loaded");
-      return;
-    }
 
     await apiTryCatch(async () => {
       const payload = {
@@ -78,7 +74,8 @@ function EditProfileForm({ setActiveTab, setRefreshProfile }) {
         skills,
       };
 
-      const response = await api.put(`/profile/${profileId}`, payload);
+      // const response = await api.put(`/profile/${profileId}`, payload);
+      const response = await api.put(`/profile`, payload);
 
       toast.success(response?.data?.message);
 
