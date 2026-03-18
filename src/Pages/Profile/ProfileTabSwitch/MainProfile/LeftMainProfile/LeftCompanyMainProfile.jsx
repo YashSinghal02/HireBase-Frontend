@@ -24,6 +24,8 @@ function LeftCompanyMainProfile({ refreshProfile }) {
     getProfile();
   }, [refreshProfile]);
 
+  
+
   return (
     <div className="left-company-main-profile">
 

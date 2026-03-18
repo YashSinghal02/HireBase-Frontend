@@ -74,9 +74,10 @@ function JobsCards({ jobs }) {
           {/* Company Info */}
           <div className="jobCards-home-company">
             <img
-              src={job.companyLogo || Blinkit}
+              src={job.logo ? job.logo : Blinkit}
               alt="company"
               className="jobCards-home-logo"
+              onError={(e) => (e.target.src = Blinkit)}
             />
             <div>
               <h4>{job.companyName}</h4>
@@ -94,13 +95,15 @@ function JobsCards({ jobs }) {
           <div className="jobCards-home-tags">
             <span className="tag-blue">{job.positions} Positions</span>
             <span className="tag-orange">{job.jobType}</span>
-            <span className="tag-purple">{job.salary
-    ? job.salary.toUpperCase().includes("LPA")
-      ? job.salary // user already wrote LPA
-      : /^[0-9]+(\s*-\s*[0-9]+)?$/.test(job.salary.trim())
-      ? `${job.salary} LPA` // append LPA if only numbers/range
-      : job.salary // if any other text, keep as-is
-    : "Not specified"}</span>
+            <span className="tag-purple">
+              {job.salary
+                ? job.salary.toUpperCase().includes("LPA")
+                  ? job.salary // user already wrote LPA
+                  : /^[0-9]+(\s*-\s*[0-9]+)?$/.test(job.salary.trim())
+                    ? `${job.salary} LPA` // append LPA if only numbers/range
+                    : job.salary // if any other text, keep as-is
+                : "Not specified"}
+            </span>
           </div>
 
           {/* Buttons */}
