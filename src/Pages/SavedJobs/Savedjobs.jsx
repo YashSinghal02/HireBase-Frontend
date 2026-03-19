@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "@/Utils/axiosConfig";
 import { apiTryCatch } from "@/Utils/trycatch";
-import Blinkit from "../../assets/Blinkit.png";
+import defaultlogo from "../../assets/defaultlogo.png";
 import { FaRegBookmark } from "react-icons/fa6";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -55,9 +55,10 @@ function SavedJobs() {
             {/* Company Info */}
             <div className="jobCards-home-company">
               <img
-                src={job.logo || Blinkit}
+                src={job.logo || defaultlogo}
                 alt={job.companyName || "Company"}
                 className="jobCards-home-logo"
+                onError={(e) => (e.target.src = defaultlogo)}
               />
               <div>
                 <h4>{job.companyName}</h4>

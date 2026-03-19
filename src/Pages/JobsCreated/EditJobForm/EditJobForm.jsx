@@ -12,8 +12,10 @@ function EditJobForm() {
 
   const [responsibilityInput, setResponsibilityInput] = useState("");
   const [responsibilities, setResponsibilities] = useState([]);
+
   const [qualificationInput, setQualificationInput] = useState("");
   const [qualifications, setQualifications] = useState([]);
+
   const [skillInput, setSkillInput] = useState("");
   const [skills, setSkills] = useState([]);
 
@@ -95,7 +97,6 @@ function EditJobForm() {
 
     if (loading) return;
 
-    // ✅ Validation
     if (
       !data.companyName ||
       !data.jobTitle ||
@@ -132,7 +133,6 @@ function EditJobForm() {
       );
       skills.forEach((item) => formData.append("skills", item));
 
-      // ✅ Only send logo if new selected
       if (data.logo) {
         formData.append("logo", data.logo);
       }
@@ -147,18 +147,12 @@ function EditJobForm() {
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong");
     } finally {
-      setLoading(false); // ✅ FIX STUCK BUTTON
+      setLoading(false);
     }
   };
 
   return (
-    <motion.div
-      className="jobform-wrapper"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7 }}
-      viewport={{ once: true }}
-    >
+    <motion.div className="jobform-wrapper">
       <div className="jobform-card">
         <div className="jobform-header">
           <button className="back-btn" onClick={() => navigate(-1)}>
@@ -169,11 +163,9 @@ function EditJobForm() {
 
         <form className="jobform-form" onSubmit={SubmitForm}>
           
-          {/* ALL YOUR ORIGINAL FIELDS (UNCHANGED) */}
-
           {/* Company */}
           <div className="form-group">
-            <label>Company Name</label>
+            <label>Company Name *</label>
             <input
               type="text"
               value={data.companyName}
@@ -183,7 +175,7 @@ function EditJobForm() {
 
           {/* Job Title */}
           <div className="form-group">
-            <label>Job Title</label>
+            <label>Job Title *</label>
             <input
               type="text"
               value={data.jobTitle}
@@ -193,7 +185,7 @@ function EditJobForm() {
 
           {/* Salary */}
           <div className="form-group">
-            <label>Salary</label>
+            <label>Salary *</label>
             <input
               type="text"
               value={data.salary}
@@ -203,7 +195,7 @@ function EditJobForm() {
 
           {/* Location */}
           <div className="form-group">
-            <label>Location</label>
+            <label>Location *</label>
             <input
               type="text"
               value={data.location}
@@ -213,7 +205,7 @@ function EditJobForm() {
 
           {/* Job Type */}
           <div className="form-group">
-            <label>Job Type</label>
+            <label>Job Type *</label>
             <select
               value={data.jobType}
               onChange={(e) => setData({ ...data, jobType: e.target.value })}
@@ -228,7 +220,7 @@ function EditJobForm() {
 
           {/* Experience */}
           <div className="form-group">
-            <label>Experience Level</label>
+            <label>Experience Level *</label>
             <select
               value={data.experienceLevel}
               onChange={(e) =>
@@ -244,7 +236,7 @@ function EditJobForm() {
 
           {/* Positions */}
           <div className="form-group">
-            <label>No. of Positions</label>
+            <label>No. of Positions *</label>
             <input
               type="number"
               value={data.positions}
@@ -264,7 +256,7 @@ function EditJobForm() {
             />
 
             {existingLogo && !data.logo && (
-              <img src={existingLogo} style={{ width: "100px" }} />
+              <img src={existingLogo}  style={{ width: "80px", marginTop: "10px", borderRadius: "6px" }} />
             )}
 
             {data.logo && (
@@ -276,14 +268,90 @@ function EditJobForm() {
           </div>
 
           {/* Description */}
-          <div className="form-group full-width">
+          <motion.div className="form-group full-width">
+            <label>Job Description *</label>
             <textarea
               value={data.description}
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })
               }
             />
-          </div>
+          </motion.div>
+
+          {/* Responsibilities */}
+          <motion.div className="form-group full-width">
+            <label>Responsibilities</label>
+
+            <div className="tag-input">
+              <input
+                value={responsibilityInput}
+                onChange={(e) => setResponsibilityInput(e.target.value)}
+                placeholder="Add responsibility"
+              />
+              <button type="button" onClick={addResponsibility}>
+                Add
+              </button>
+            </div>
+
+            <div className="tag-container-job-form">
+              {responsibilities.map((item, index) => (
+                <div key={index} className="tag-job-form">
+                  {item}
+                  <span onClick={() => deleteResponsibility(index)}>✕</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Qualifications */}
+          <motion.div className="form-group full-width">
+            <label>Qualifications</label>
+
+            <div className="tag-input">
+              <input
+                value={qualificationInput}
+                onChange={(e) => setQualificationInput(e.target.value)}
+                placeholder="Add qualification"
+              />
+              <button type="button" onClick={addQualification}>
+                Add
+              </button>
+            </div>
+
+            <div className="tag-container-job-form">
+              {qualifications.map((item, index) => (
+                <div key={index} className="tag-job-form">
+                  {item}
+                  <span onClick={() => deleteQualification(index)}>✕</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Skills */}
+          <motion.div className="form-group full-width">
+            <label>Skills</label>
+
+            <div className="tag-input">
+              <input
+                value={skillInput}
+                onChange={(e) => setSkillInput(e.target.value)}
+                placeholder="Add skill"
+              />
+              <button type="button" onClick={addSkill}>
+                Add
+              </button>
+            </div>
+
+            <div className="tag-container-job-form-skills">
+              {skills.map((item, index) => (
+                <div key={index} className="tag-job-form-skills">
+                  {item}
+                  <span onClick={() => deleteSkill(index)}>✕</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
           <button className="post-btn" disabled={loading}>
             {loading ? "Updating..." : "Update Job"}

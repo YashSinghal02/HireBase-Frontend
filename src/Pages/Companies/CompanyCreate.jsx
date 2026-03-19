@@ -49,7 +49,7 @@ function CompanyCreate({ jobs,deleteCard }) {
         return(
         <div className="company-row" key={company._id}>
           <div className="logo-col">
-            <img src={company.logo ? company.logo : google}  alt={company.companyName} />
+            <img src={company.logo ? company.logo : google} alt={company.companyName} onError={(e) => (e.target.src = Blinkit)} />
           </div>
           <div>{company.companyName}</div>
           <div>{created}</div>

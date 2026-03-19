@@ -1,6 +1,6 @@
 import "./JobsCards.css";
 import { FaRegBookmark } from "react-icons/fa6";
-import Blinkit from "../../assets/Blinkit.png";
+import defaultlogo from "../../assets/defaultlogo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { api } from "@/Utils/axiosConfig";
@@ -74,10 +74,10 @@ function JobsCards({ jobs }) {
           {/* Company Info */}
           <div className="jobCards-home-company">
             <img
-              src={job.logo ? job.logo : Blinkit}
+              src={job.logo ? job.logo : defaultlogo}
               alt="company"
               className="jobCards-home-logo"
-              onError={(e) => (e.target.src = Blinkit)}
+              onError={(e) => (e.target.src = defaultlogo)}
             />
             <div>
               <h4>{job.companyName}</h4>

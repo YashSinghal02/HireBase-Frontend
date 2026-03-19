@@ -110,7 +110,7 @@ await apiTryCatch (async () => {
       </div>
 
       <div className="signup-layout">
-        <div className="signup-logo"><img src={logo} alt="" /></div>
+        {/* <div className="signup-logo"><img src={logo} alt="" /></div> */}
         {/* ================= LEFT SIDE ================= */}
         <div className="signup-left">
 

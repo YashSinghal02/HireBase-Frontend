@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./JobDetails.css";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaRegBookmark } from "react-icons/fa";
-import Amazon from "../../assets/Amazonlogo.png";
+import defaultlogo from "../../assets/defaultlogo.png";
 import { useState, useEffect } from "react";
 import { api } from "@/Utils/axiosConfig";
 import { apiTryCatch } from "@/Utils/trycatch";
@@ -60,10 +60,10 @@ function JobDetails() {
           <div className="jobDetails-company">
             {/* <img src={data.companyLogo ? data.companyLogo : Amazon}  alt="company" /> */}
             <img
-              src={data.logo ? data.logo : Amazon}
+              src={data.logo ? data.logo : defaultlogo}
               alt="company"
               className="jobCards-home-logo"
-              onError={(e) => (e.target.src = Amazon)}
+              onError={(e) => (e.target.src = defaultlogo)}
             />
             <div>
               <h2>{data.jobTitle}</h2>

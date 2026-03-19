@@ -56,7 +56,7 @@
   border: 5px solid #071a14;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  /* box-shadow: 0 15px 35px rgba(30, 0, 255, 0.6); */
   cursor: pointer;
 }
 

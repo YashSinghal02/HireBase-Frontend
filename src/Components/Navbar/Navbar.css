@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 60px;
+  padding: 18px 20px;
   background: rgba(11, 15, 20, 0.647);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(61, 170, 125, 0.15);
@@ -322,7 +322,7 @@
 
   .btn-glass-navbar {
     position: relative;
-    padding: 11px 28px;
+    padding: 11px 17px;
     border-radius: 12px;
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
@@ -341,9 +341,15 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
+   background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+
+/* Standard (for compatibility) */
+mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+mask-composite: exclude;
+
+/* Webkit (for Chrome/Safari) */
+-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
   }
@@ -400,16 +406,42 @@
 }
 
 /* ================= RESPONSIVE ================= */
+@media (min-width: 490px) {
+.navbar {
+  padding: 18px 40px;
+}
+
+}
+
+@media (min-width: 550px) {
+.navbar {
+  padding: 18px 60px;
+}
+}
+
+
+
 
 
 @media (min-width: 768px) {
 
+ 
   .nav-ul {
     display: flex;
   }
 
   .bar {
     display: none;
+  }
+
+}
+
+
+
+@media (min-width: 880px) {
+
+  .btn-glass-navbar {
+    padding: 11px 28px;
   }
 
 }

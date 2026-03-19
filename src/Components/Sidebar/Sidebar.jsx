@@ -15,9 +15,9 @@ function Sidebar() {
 
   return (
     <>
-      <div className="sidebar-toggle" onClick={() => setOpen(!open)}>
+      {/* <div className="sidebar-toggle" onClick={() => setOpen(!open)}>
         <button className="sidebar-btn">SideBar</button>
-      </div>
+      </div> */}
 
       <div className={`sidebar ${open ? "active" : ""}`}>
         {visibleItems.map((item, index) => (

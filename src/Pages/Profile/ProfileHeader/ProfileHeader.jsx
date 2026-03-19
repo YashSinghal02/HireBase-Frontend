@@ -1,5 +1,6 @@
 import "./ProfileHeader.css";
-import profilebanner from "../../../assets/profilebanner.png";
+import defaultbanner from "../../../assets/defaultbanner.png";
+import defaultprofile from "../../../assets/defaultprofile.jpg";
 import { motion } from "framer-motion";
 import { useState, useEffect, useContext } from "react";
 import { api } from "@/Utils/axiosConfig";
@@ -75,7 +76,7 @@ function ProfileHeader({ refreshProfile }) {
         {/* ✅ Use user banner if available, otherwise fallback */}
         <img
           src={
-            data?.userId?.banner || data?.companylogo || profilebanner
+            data?.userId?.banner || data?.companylogo || defaultbanner
           }
           alt="banner"
         />
@@ -93,7 +94,7 @@ function ProfileHeader({ refreshProfile }) {
             src={
               data?.userId?.profile ||
               data?.companylogo ||
-              "https://img.freepik.com/free-photo/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129416.jpg"
+              defaultprofile
             }
             alt="avatar"
           />

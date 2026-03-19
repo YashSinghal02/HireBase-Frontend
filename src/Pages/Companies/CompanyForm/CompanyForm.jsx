@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import "./CompanyForm.css";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { api } from "@/Utils/axiosConfig";
-import { apiTryCatch } from "@/Utils/trycatch";
 import toast from "react-hot-toast";
-
 
 function CompanyForm() {
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const [logoFile, setLogoFile] = useState(null);
 
   const [data, setData] = useState({
     companyName: "",
@@ -20,17 +20,64 @@ function CompanyForm() {
     logo: "",
   });
 
-  async function SubmitForm(e) {
-    e.preventDefault();
+  // ================= SUBMIT =================
+async function SubmitForm(e) {
+  e.preventDefault();
+  if (loading) return;
 
-    await apiTryCatch(async () => {
-      const response = await api.post("/companies/", data);
-
-      toast.success(response?.data?.message);
-
-      navigate("/dashboard/companies");
-    });
+  // ✅ Validation
+  if (
+    !data.companyName ||
+    !data.website ||
+    !data.location ||
+    !data.description ||
+    !logoFile
+  ) {
+    toast.error("Please fill all required fields");
+    return;
   }
+
+  setLoading(true);
+
+  try {
+    let logoUrl = "";
+
+    if (logoFile) {
+      const formData = new FormData();
+      formData.append("file", logoFile);
+
+      const res = await api.post("/uploads/single", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      logoUrl = res?.data?.url;
+    }
+
+    const payload = {
+      ...data,
+      logo: logoUrl,
+    };
+
+    const response = await api.post("/companies/", payload);
+
+    toast.success(response?.data?.message || "Company Created");
+    navigate("/dashboard/companies");
+
+  } catch (error) {
+    toast.error(error?.response?.data?.message || "Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+}
+
+  // ================= LOGO =================
+  const handleLogoUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setLogoFile(file);
+  };
 
   return (
     <motion.div
@@ -47,88 +94,70 @@ function CompanyForm() {
           </button>
           <h2>Company Setup</h2>
         </div>
+
         <form className="company-form" onSubmit={SubmitForm}>
-          {/* Row 1 */}
-          <motion.div
-            className="form-group"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="companyName">Company Name</label>
+          
+          {/* Company Name */}
+          <div className="form-group">
+            <label>Company Name</label>
             <input
               type="text"
+              placeholder="e.g. Google, Infosys"
               value={data.companyName}
               onChange={(e) =>
                 setData({ ...data, companyName: e.target.value })
               }
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="form-group"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="logo">Logo</label>
-            <input
-              type="file"
-              onChange={(e) => setData({ ...data, logo: e.target.files[0] })}
-            />
-          </motion.div>
+          {/* Logo */}
+          <div className="form-group">
+            <label>Logo</label>
+            <input type="file" accept="image/*" onChange={handleLogoUpload} />
+          </div>
 
-          {/* Row 2 */}
-          <motion.div
-            className="form-group"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="website">Website</label>
+          {/* Website */}
+          <div className="form-group">
+            <label>Website</label>
             <input
               type="text"
+              placeholder="https://company.com"
               value={data.website}
-              onChange={(e) => setData({ ...data, website: e.target.value })}
+              onChange={(e) =>
+                setData({ ...data, website: e.target.value })
+              }
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="form-group"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="location">Location</label>
+          {/* Location */}
+          <div className="form-group">
+            <label>Location</label>
             <input
               type="text"
+              placeholder="e.g. Bangalore, India"
               value={data.location}
-              onChange={(e) => setData({ ...data, location: e.target.value })}
+              onChange={(e) =>
+                setData({ ...data, location: e.target.value })
+              }
             />
-          </motion.div>
+          </div>
 
-          {/* Full Width Description at End */}
-          <motion.div
-            className="form-group full-width"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <label htmlFor="description">Description</label>
+          {/* Description */}
+          <div className="form-group full-width">
+            <label>Description</label>
             <textarea
+              placeholder="Write about the company..."
               value={data.description}
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })
               }
             ></textarea>
-          </motion.div>
+          </div>
 
-          <button className="update-btn">Update</button>
+          <button type="submit" className="update-btn" disabled={loading}>
+            {loading ? "Creating..." : "Create Company"}
+          </button>
+
         </form>
       </div>
     </motion.div>

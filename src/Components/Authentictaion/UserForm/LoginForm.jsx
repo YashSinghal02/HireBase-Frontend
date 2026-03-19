@@ -61,9 +61,9 @@ function LoginForm() {
 
   return (
     <div className="form-container-login">
-      <div className="login-logo">
+      {/* <div className="login-logo">
         <img src={logo} alt="" />
-      </div>
+      </div> */}
       <form className="simple-form-login" onSubmit={SubmitForm}>
         <h2 className="login-title">Log In</h2>
 

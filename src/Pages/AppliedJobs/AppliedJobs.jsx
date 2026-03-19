@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '@/Utils/axiosConfig';
 import { apiTryCatch } from '@/Utils/trycatch';
-import Blinkit from '../../assets/Blinkit.png';
+import defaultlogo from '../../assets/defaultlogo.png';
 import { FaRegBookmark } from "react-icons/fa6";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -52,9 +52,10 @@ function AppliedJobs() {
             {/* Company section */}
             <div className="jobCards-home-company">
               <img
-                src={job.logo ? job.logo : Blinkit}
+                src={job.logo ? job.logo : defaultlogo}
                 alt={job.companyName}
                 className="jobCards-home-logo"
+                onError={(e) => (e.target.src = defaultlogo)}
               />
               <div>
                 <h4>{job.companyName}</h4>
