@@ -88,9 +88,11 @@ function NavBar() {
       {/* ================= NAVBAR ================= */}
       <nav className="navbar">
         {/* Logo */}
+        <Link  to="/">
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
+        </Link>
 
         {/* Navigation Links */}
         <ul className="nav-ul" ref={navRef}>
