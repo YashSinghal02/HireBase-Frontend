@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./OTPSignup.css";
+// import "./OTPSignup.css";
 import { IoArrowBack } from "react-icons/io5";
 import axios from "axios";
 import { useState,useEffect } from "react";

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import EmployerJobCardCreated from "./EmployerJobCardCreated";
-import "./jobscreated.css";
+import "./JobsCreated.css";
 import { motion } from "framer-motion";
 import { apiTryCatch } from "@/Utils/trycatch";
 import { api } from "@/Utils/axiosConfig";
