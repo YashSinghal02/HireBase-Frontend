@@ -1,4 +1,4 @@
-import "./NavBar.css";
+import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { useState, useEffect, useRef, useContext } from "react";
 import { FiUser, FiLogOut } from "react-icons/fi";
