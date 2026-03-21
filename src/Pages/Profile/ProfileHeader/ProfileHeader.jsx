@@ -24,7 +24,7 @@ function ProfileHeader({ refreshProfile }) {
       }
 
       const profile = response?.data?.data;
-      console.log("PROFILE DATA:", profile);
+      // console.log("PROFILE DATA:", profile);
 
       setData(profile);
     });

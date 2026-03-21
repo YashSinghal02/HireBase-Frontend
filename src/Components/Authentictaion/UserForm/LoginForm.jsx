@@ -52,7 +52,7 @@ function LoginForm() {
       "userDetails",
       JSON.stringify({ userId: id, role, name, email,phone })
     );
-    console.log("Login response:", response.data.data);
+    // console.log("Login response:", response.data.data);
 
     toast.success(response?.data?.message);
     navigate("/dashboard");

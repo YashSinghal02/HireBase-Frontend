@@ -23,7 +23,7 @@ function JobsCards({ jobs }) {
       const res = await api.post(`/jobs/${jobId}/apply/`);
       toast.success(res.data.message);
     });
-  };
+  }
 
   // Save Job
   const handleSave = async (jobId) => {
@@ -31,7 +31,7 @@ function JobsCards({ jobs }) {
       const res = await api.post(`/savedjobs/${jobId}/save`);
       toast.success(res.data.message);
     });
-  };
+  }
 
   if (!jobs.length) {
     return (

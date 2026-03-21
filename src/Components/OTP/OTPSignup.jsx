@@ -54,7 +54,7 @@ useEffect(()=>{
       
      await apiTryCatch (async () => {
        const response =  await api.post("/user/otp",{email: data.email, otp: finalOtp})
-        console.log("response.data",response.data)
+        // console.log("response.data",response.data)
         toast.success(response?.data?.message);
          navigate("/login", { replace: true }); 
       })

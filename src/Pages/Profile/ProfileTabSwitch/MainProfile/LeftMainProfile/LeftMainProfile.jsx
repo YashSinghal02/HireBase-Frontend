@@ -8,13 +8,13 @@ import { AuthContext } from "@/AuthContext/AuthContext";
 function LeftMainProfile({ refreshProfile }) {
   const { role, userId } = useContext(AuthContext);
 
-  console.log("refreshProfile:", refreshProfile);
+  // console.log("refreshProfile:", refreshProfile);
   const [data, setData] = useState(null);
 
   async function getProfile() {
     await apiTryCatch(async () => {
       const response = await api.get("/profile");
-      console.log(response.data);
+      // console.log(response.data);
       const profile = response?.data?.data;
       setData(profile);
       // setData(response.data.data);
