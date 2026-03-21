@@ -203,3 +203,24 @@ transform: translateY(-2px);
     margin-bottom: 40px;
   }
 }
+
+@media (max-width: 450px) {
+  .home-cards-title2 {
+    font-size: 27px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-cards-title2 {
+    font-size: 26px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 391px) {
+  .home-cards-title2 {
+    font-size: 25px;
+    margin-bottom: 40px;
+  }
+}

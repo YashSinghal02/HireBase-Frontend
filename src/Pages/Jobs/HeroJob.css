@@ -95,6 +95,8 @@
 }
 
 /* ===== RESPONSIVE ===== */
+
+
 @media (max-width: 768px) {
 
     .jobs-card {
@@ -112,5 +114,18 @@
 
     .search-home-btn {
         padding: 12px 20px;
+    }
+}
+
+@media (max-width: 460px) {
+    .jobs-card {
+        max-width: 440px;
+    }
+}
+
+/* ≤ 420px */
+@media (max-width: 420px) {
+    .jobs-card {
+        max-width: 420px;
     }
 }

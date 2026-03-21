@@ -8,3 +8,23 @@
   flex: 1;
   padding: 60px 20px;
 }
+
+/* ===== RESPONSIVE ===== */
+
+
+/* 
+@media (max-width: 920px) {
+.dashboard-content {
+  flex: 1;
+  padding: 60px 20px;
+}
+
+} */
+
+@media (max-width: 420px) {
+.dashboard-content {
+  flex: 1;
+  padding: 60px 0px;
+}
+
+}
