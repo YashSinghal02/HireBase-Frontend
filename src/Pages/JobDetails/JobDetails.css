@@ -92,8 +92,8 @@ html, body {
   width: clamp(60px, 8vw, 80px);
   height: clamp(60px, 8vw, 80px);
   border-radius: 12px;
-  background: #1c2624;
-  object-fit: contain;
+  background: #ffffff;
+  object-fit: cover;
 }
 
 .jobDetails-company h2 {

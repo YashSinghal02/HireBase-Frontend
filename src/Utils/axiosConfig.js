@@ -13,8 +13,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: "https://job-portal-backend-6j6e.onrender.com/api",
-  // baseURL: "http://localhost:3000/api",
+    // baseURL: "https://job-portal-backend-6j6e.onrender.com/api",
+  baseURL: "http://localhost:3000/api",
   withCredentials: true, // IMPORTANT for cookies
 });
 
