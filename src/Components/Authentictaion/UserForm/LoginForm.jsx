@@ -8,10 +8,9 @@ import logo from "../../../assets/logo.png";
 import { api } from "../../../Utils/axiosConfig.js";
 import { apiTryCatch } from "../../../Utils/trycatch.js";
 
-
 function LoginForm() {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -27,7 +26,7 @@ function LoginForm() {
   //     const token = response.headers.authorization.split(" ")[1];
   //     localStorage.setItem("accessToken", token);
   //     const {useId, role}=response.data;
-      
+
   //     setData({
   //       email: "",
   //       password: "",
@@ -38,26 +37,43 @@ function LoginForm() {
   // }
 
   async function SubmitForm(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  await apiTryCatch(async () => {
-    const response = await api.post("/user/login", data);
+    if (loading) return;
 
-    const token = response.headers.authorization.split(" ")[1];
-    localStorage.setItem("accessToken", token);
+    if (!data.email || !data.password) {
+      toast.error("Please fill all required fields");
+      return;
+    }
 
-    const { id, role, name, email,phone } = response.data.data;
+    setLoading(true);
 
-    localStorage.setItem(
-      "userDetails",
-      JSON.stringify({ userId: id, role, name, email,phone })
-    );
-    // console.log("Login response:", response.data.data);
+    try {
+      const response = await apiTryCatch(() => api.post("/user/login", data));
 
-    toast.success(response?.data?.message);
-    navigate("/dashboard");
-  });
-}
+      if (!response) return;
+
+      if (response.data.status === "fail") {
+    toast.error(response.data.message);
+    return;
+  }
+
+      const token = response.headers.authorization.split(" ")[1];
+      localStorage.setItem("accessToken", token);
+
+      const { id, role, name, email, phone } = response.data.data;
+
+      localStorage.setItem(
+        "userDetails",
+        JSON.stringify({ userId: id, role, name, email, phone }),
+      );
+
+      toast.success(response?.data?.message);
+      navigate("/dashboard");
+    } finally {
+      setLoading(false); // ✅ always runs
+    }
+  }
 
   return (
     <div className="form-container-login">
@@ -98,7 +114,15 @@ function LoginForm() {
           </div>
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit" disabled={loading}>
+          {loading ? (
+            <>
+              <span className="spinner"></span> Logging in...
+            </>
+          ) : (
+            "Login"
+          )}
+        </button>
 
         {/* <Link to="/allcard"> <button type="submit">Login</button></Link> */}
         <div className="text-center2 mt-3">
