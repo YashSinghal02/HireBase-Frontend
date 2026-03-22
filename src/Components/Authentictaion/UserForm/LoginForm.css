@@ -232,3 +232,10 @@ background-size: cover;
     transform: translateX(-50%);
   }
 }
+
+@media (max-width: 460px) {
+  .form-container-login {
+    padding: 24px 10px;
+  }
+ 
+}
