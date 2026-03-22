@@ -12,7 +12,7 @@
 /* ===== TEXT AREA ===== */
 .home-hero-txt {
     flex: 1;
-    max-width: 650px;
+    max-width: 600px;
 }
 /* 
 .home-hero-txt h2 {
@@ -162,5 +162,24 @@
 
     .home-hero-img img {
         max-width: 100%;
+    }
+}
+
+@media (max-width: 410px) {
+    .home-hero-txt  {
+        width: 380px;
+    }
+    #search-bar-home{
+        padding: 6px;
+    }
+}
+
+
+@media (max-width: 392px) {
+    .home-hero-txt  {
+        width: 370px;
+    }
+    #search-bar-home{
+        padding: 6px;
     }
 }

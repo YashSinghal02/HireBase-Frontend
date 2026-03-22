@@ -14,3 +14,10 @@
     flex-direction: column;
   }
 }
+
+
+@media (max-width:393px) {
+.blog-combine {
+  padding: 80px 4%;
+}
+}

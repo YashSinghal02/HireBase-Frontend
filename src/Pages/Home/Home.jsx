@@ -15,35 +15,68 @@ import JobCardTitle from "../Jobs/JobCardTitle";
 import React, { useEffect, useState } from "react";
 import { apiTryCatch } from "@/Utils/trycatch";
 import { api } from "@/Utils/axiosConfig";
-
+import JobCardSkeleton from "@/Components/JobsMapCard/JobCardSkeleton";
 
 function Home() {
-    const [jobs, setJobs] = useState([]);
-    const [filteredJobs, setFilteredJobs] = useState([]);
-    useEffect(() => {
-      const getData = async () => {
-        await apiTryCatch(async () => {
-          const response = await api.get("/employer/jobs");
-          setJobs(response.data.data);
-          setFilteredJobs(response.data.data);
-          // console.log("Response",response.data.data)
-        });
-      };
-  
-      getData();
-    }, []);
-  
+  const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showSkeleton, setShowSkeleton] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    const getData = async () => {
+      setLoading(true);
+
+      // start delay timer
+      timer = setTimeout(() => {
+        setShowSkeleton(true);
+      }, 300); // show only if slow
+      await apiTryCatch(async () => {
+        const response = await api.get("/employer/jobs");
+        setJobs(response.data.data);
+        setFilteredJobs(response.data.data);
+        // console.log("Response",response.data.data)
+      });
+      clearTimeout(timer); // stop timer if fast
+      setLoading(false);
+      setShowSkeleton(false); // reset
+    };
+
+    getData();
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div>
       <HomeBadge />
-      <Homehero  jobs={jobs} setFilteredJobs={setFilteredJobs}/> {/* 1️⃣ Strong first impression */}
-      <JobCardTitle/>{/* 5️ It is title of Live jobs (engagement) only */}
-      <JobsCards jobs={filteredJobs} /> {/* 6️⃣ Live jobs (engagement) */}
+      <Homehero jobs={jobs} setFilteredJobs={setFilteredJobs} />{" "}
+      {/* 1️⃣ Strong first impression */}
+      <JobCardTitle />
+      {/* 5️ It is title of Live jobs (engagement) only */}
+      {loading ? (
+        showSkeleton ? (
+          <div className="jobCards-home-wrapper">
+            {Array(6)
+              .fill(0)
+              .map((_, i) => (
+                <JobCardSkeleton key={i} />
+              ))}
+          </div>
+        ) : (
+          <div
+            className="jobCards-home-wrapper"
+            style={{ minHeight: "300px" }}
+          />
+        )
+      ) : (
+        <JobsCards jobs={filteredJobs} />
+      )}{" "}
+      {/* 6️⃣ Live jobs (engagement) */}
       <TrustCompany /> {/* 2️⃣ Social proof early */}
       <HomeCards /> {/* 3️⃣ Key features / value */}
       <WhyPopular /> {/* 4️⃣ Why choose HireBase */}
       <WorkingProcess /> {/* 5️⃣ How it works */}
-      
       <HomeTestimonial /> {/* 7️⃣ More social proof */}
       <DownloadApp /> {/* 8️⃣ Conversion CTA */}
       <HomeFAQs /> {/* 9️⃣ Objection handling */}

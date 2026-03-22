@@ -117,15 +117,55 @@
     }
 }
 
+
+
+
 @media (max-width: 460px) {
     .jobs-card {
-        max-width: 440px;
+        max-width: 410px;
+    }
+     .search-bar-home{
+        padding: 0px;
+    }
+    .search-home-icon{
+        margin-left: -2px;
     }
 }
 
 /* ≤ 420px */
 @media (max-width: 420px) {
     .jobs-card {
-        max-width: 420px;
+        max-width: 400px;
+    }
+    .search-bar-home{
+        padding: 0px;
+    }
+    .search-home-icon{
+        margin-left: -2px;
+    }
+}
+
+@media (max-width:410px) {
+    .jobs-card {
+        max-width: 380px;
+    }
+    .search-bar-home{
+        padding: 0px;
+    }
+    .search-home-icon{
+        margin-left: -2px;
+    }
+}
+
+
+@media (max-width: 393px) {
+    .jobs-card {
+        max-width: 380px;
+    }
+    .search-bar-home{
+        padding: 0px;
+    }
+    .search-home-icon{
+        margin-left: -2px;
     }
 }

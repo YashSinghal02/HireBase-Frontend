@@ -218,7 +218,7 @@ h4 {
 
 .simple-form-signup {
   background: rgba(255, 255, 255, 0.05);
-  /* backdrop-filter: blur(22px); */
+  backdrop-filter: blur(22px);
 
   padding: 45px;
   width: 100%;
@@ -482,4 +482,11 @@ h4 {
     width: 175px;
     transform: translateX(-50%);
   }
+}
+
+@media (max-width: 460px) {
+  .signup-layout {
+    padding: 40px 10px;
+  }
+
 }

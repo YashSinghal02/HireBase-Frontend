@@ -128,7 +128,7 @@ function JobDetails() {
             {role === "employee" && (
               <button
                 className="save-btn"
-                onClick={() => handleApply(data._id)}
+                onClick={() => handleSave(data._id)}
               >
                 Save
               </button>

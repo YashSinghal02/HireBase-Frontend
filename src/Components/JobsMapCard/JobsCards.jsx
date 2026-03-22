@@ -23,7 +23,7 @@ function JobsCards({ jobs }) {
       const res = await api.post(`/jobs/${jobId}/apply/`);
       toast.success(res.data.message);
     });
-  }
+  };
 
   // Save Job
   const handleSave = async (jobId) => {
@@ -31,7 +31,7 @@ function JobsCards({ jobs }) {
       const res = await api.post(`/savedjobs/${jobId}/save`);
       toast.success(res.data.message);
     });
-  }
+  };
 
   if (!jobs.length) {
     return (
@@ -98,10 +98,10 @@ function JobsCards({ jobs }) {
             <span className="tag-purple">
               {job.salary
                 ? job.salary.toUpperCase().includes("LPA")
-                  ? job.salary // user already wrote LPA
+                  ? job.salary.toUpperCase() // 🔥 fix here
                   : /^[0-9]+(\s*-\s*[0-9]+)?$/.test(job.salary.trim())
-                    ? `${job.salary} LPA` // append LPA if only numbers/range
-                    : job.salary // if any other text, keep as-is
+                    ? `${job.salary} LPA`
+                    : job.salary
                 : "Not specified"}
             </span>
           </div>
