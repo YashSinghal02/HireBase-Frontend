@@ -4,35 +4,44 @@ import defaultprofile from "../../../assets/defaultprofile.jpg";
 import { motion } from "framer-motion";
 import { useState, useEffect, useContext } from "react";
 import { api } from "@/Utils/axiosConfig";
-import { apiTryCatch } from "@/Utils/trycatch";
 import { AuthContext } from "@/AuthContext/AuthContext";
+import ProfileHeaderSkeleton from "./ProfileHeaderSkeleton";
+import { apiTryCatch } from "@/Utils/trycatch";
+
 
 function ProfileHeader({ refreshProfile }) {
   const { name, role, userId } = useContext(AuthContext);
+
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
   // ✅ Fetch Profile
-  async function getProfile() {
+async function getProfile() {
+  setLoading(true);
+
+  try {
     await apiTryCatch(async () => {
       let response;
 
       if (role === "employer") {
-        // Use new backend with populated user fields
         response = await api.get("/company-profile");
       } else {
         response = await api.get("/profile");
       }
 
       const profile = response?.data?.data;
-      // console.log("PROFILE DATA:", profile);
-
       setData(profile);
     });
+  } finally {
+    setLoading(false); // ✅ always runs
   }
+}
 
-  useEffect(() => {
+useEffect(() => {
+  if (role) {
     getProfile();
-  }, []);
+  }
+}, [role]);
 
   // ✅ Upload Handler
   const handleFileUpload = async (e, type) => {
@@ -50,14 +59,23 @@ function ProfileHeader({ refreshProfile }) {
     const formData = new FormData();
     formData.append(type, file);
 
-    await api.post(`/uploads/user/${userId}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    try {
+      await api.post(`/uploads/user/${userId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-    getProfile();
+      getProfile(); // refresh after upload
+    } catch (error) {
+      console.log("Upload error:", error);
+    }
   };
+
+  // ✅ Skeleton Loader (NO flicker)
+ if (loading) {
+  return <ProfileHeaderSkeleton />;
+}
 
   return (
     <div>
@@ -73,10 +91,11 @@ function ProfileHeader({ refreshProfile }) {
           ✎
         </label>
 
-        {/* ✅ Use user banner if available, otherwise fallback */}
         <img
           src={
-            data?.userId?.banner || data?.companylogo || defaultbanner
+            data?.userId?.banner ||
+            data?.companylogo ||
+            defaultbanner
           }
           alt="banner"
         />
@@ -87,14 +106,16 @@ function ProfileHeader({ refreshProfile }) {
         <motion.div
           className="profile-header-main-img"
           initial={{ opacity: 0, x: -10 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
           <img
             src={
-              data?.userId?.profile ||
-              data?.companylogo ||
-              defaultprofile
+              data?.userId?.profile
+                ? data.userId.profile
+                : data?.companylogo
+                ? data.companylogo
+                : defaultprofile
             }
             alt="avatar"
           />
@@ -113,12 +134,16 @@ function ProfileHeader({ refreshProfile }) {
         <motion.div
           className="profile-header-txt"
           initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
           <h3>{name || "User"}</h3>
 
-          <p>{role === "employee" ? data?.occupation || "N/A" : "Recruiter"}</p>
+          <p>
+            {role === "employee"
+              ? data?.occupation || "N/A"
+              : "Recruiter"}
+          </p>
         </motion.div>
       </div>
     </div>
