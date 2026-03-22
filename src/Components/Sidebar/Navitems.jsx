@@ -38,6 +38,12 @@ export const Navitems = [
     allowedRoles: ["admin", "employer"],
   },
   {
+    name: "Applicants",
+    path: "/dashboard/applicants",
+    icon: <FaFileAlt />,
+    allowedRoles: ["admin","employer"],
+  },
+  {
     name: "Settings",
     path: "/profile",
     icon: <FaCog />,

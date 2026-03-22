@@ -57,7 +57,7 @@
   overflow: hidden;
   position: relative;
   /* box-shadow: 0 15px 35px rgba(30, 0, 255, 0.6); */
-  cursor: pointer;
+    cursor: default;
 }
 
 .profile-header-main-img img {
@@ -78,10 +78,22 @@
 }
 
 /* Show overlay on hover */
-.profile-header-main-img:hover::after {
+/* .profile-header-main-img:hover::after {
+  opacity: 1;
+} */
+
+/* Only allow hover effect if editable */
+.profile-header-main-img.editable:hover::after {
   opacity: 1;
 }
 
+/* Only show upload text if editable */
+.profile-header-main-img.editable:hover .upload-avatar {
+  opacity: 1;
+}
+.profile-header-main-img.editable {
+  cursor: pointer;
+}
 /* Upload Text (Hidden by default) */
 .upload-avatar {
   position: absolute;

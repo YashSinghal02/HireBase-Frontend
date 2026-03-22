@@ -8,43 +8,51 @@ import { AuthContext } from "@/AuthContext/AuthContext";
 import ProfileHeaderSkeleton from "./ProfileHeaderSkeleton";
 import { apiTryCatch } from "@/Utils/trycatch";
 
+function ProfileHeader({ refreshProfile, viewUserId }) {
+  const { role, userId: loggedInUserId } = useContext(AuthContext);
 
-function ProfileHeader({ refreshProfile }) {
-  const { name, role, userId } = useContext(AuthContext);
+  const isOwnProfile = !viewUserId;
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
   // ✅ Fetch Profile
-async function getProfile() {
-  setLoading(true);
+  async function getProfile() {
+    setLoading(true);
 
-  try {
-    await apiTryCatch(async () => {
-      let response;
+    try {
+      await apiTryCatch(async () => {
+        let response;
 
-      if (role === "employer") {
-        response = await api.get("/company-profile");
-      } else {
-        response = await api.get("/profile");
-      }
+        if (viewUserId) {
+          // 👀 Employer viewing applicant
+          response = await api.get(`/profile/${viewUserId}`);
+        } else {
+          // 👤 Own profile
+          if (role === "employer") {
+            response = await api.get("/company-profile");
+          } else {
+            response = await api.get("/profile");
+          }
+        }
 
-      const profile = response?.data?.data;
-      setData(profile);
-    });
-  } finally {
-    setLoading(false); // ✅ always runs
+        setData(response?.data?.data);
+      });
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
-useEffect(() => {
-  if (role) {
-    getProfile();
-  }
-}, [role]);
+  useEffect(() => {
+    if (role) {
+      getProfile();
+    }
+  }, [role, viewUserId, refreshProfile]); // ✅ IMPORTANT
 
-  // ✅ Upload Handler
+  // ✅ Upload Handler (only for own profile)
   const handleFileUpload = async (e, type) => {
+    if (!isOwnProfile) return; // 🔒 safety
+
     const file = e.target.files[0];
     if (!file) return;
 
@@ -60,36 +68,37 @@ useEffect(() => {
     formData.append(type, file);
 
     try {
-      await api.post(`/uploads/user/${userId}`, formData, {
+      await api.post(`/uploads/user/${loggedInUserId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      getProfile(); // refresh after upload
+      getProfile(); // refresh
     } catch (error) {
       console.log("Upload error:", error);
     }
   };
 
-  // ✅ Skeleton Loader (NO flicker)
- if (loading) {
-  return <ProfileHeaderSkeleton />;
-}
+  if (loading) {
+    return <ProfileHeaderSkeleton />;
+  }
 
   return (
     <div>
       {/* Banner */}
       <div className="profile-header-banner-img">
-        <label className="upload-banner">
-          <input
-            hidden
-            type="file"
-            accept="image/*"
-            onChange={(e) => handleFileUpload(e, "banner")}
-          />
-          ✎
-        </label>
+        {isOwnProfile && (
+          <label className="upload-banner">
+            <input
+              hidden
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleFileUpload(e, "banner")}
+            />
+            ✎
+          </label>
+        )}
 
         <img
           src={
@@ -104,7 +113,7 @@ useEffect(() => {
       {/* Avatar + Text */}
       <div className="profile-header-img-txt-flx">
         <motion.div
-          className="profile-header-main-img"
+          className={`profile-header-main-img ${isOwnProfile ? "editable" : ""}`}
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -120,15 +129,17 @@ useEffect(() => {
             alt="avatar"
           />
 
-          <label className="upload-avatar">
-            <input
-              type="file"
-              hidden
-              accept="image/*"
-              onChange={(e) => handleFileUpload(e, "profile")}
-            />
-            Upload Image
-          </label>
+          {isOwnProfile && (
+            <label className="upload-avatar">
+              <input
+                type="file"
+                hidden
+                accept="image/*"
+                onChange={(e) => handleFileUpload(e, "profile")}
+              />
+              Upload Image
+            </label>
+          )}
         </motion.div>
 
         <motion.div
@@ -137,10 +148,12 @@ useEffect(() => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h3>{name || "User"}</h3>
+          <h3>{data?.userId?.name || "User"}</h3>
 
           <p>
-            {role === "employee"
+            {viewUserId
+              ? data?.occupation || "Candidate"
+              : role === "employee"
               ? data?.occupation || "N/A"
               : "Recruiter"}
           </p>

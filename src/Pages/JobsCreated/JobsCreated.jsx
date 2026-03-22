@@ -8,37 +8,68 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import toast from "react-hot-toast";
 import dayjs from "dayjs";
 import { AuthContext } from "@/AuthContext/AuthContext";
-
-
+import JobCardSkeleton from "@/Components/JobsMapCard/JobCardSkeleton";
 
 function JobsCreated() {
   const { userId } = useContext(AuthContext);
 
-  // For Get JOb Card
+  // ✅ Loading states
+  const [loading, setLoading] = useState(true);
+  const [showSkeleton, setShowSkeleton] = useState(false);
+
+  // ✅ Jobs state
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
 
-  async function getJobs() {
-    await apiTryCatch(async () => {
-      const response = await api.get(`/user/getjobs/${userId}`);
-      setJobs(response.data.data.createdJobs);
-      setFilteredJobs(response.data.data.createdJobs);
-    });
-  }
+  // ✅ Fetch Jobs (same pattern as AppliedJobs)
   useEffect(() => {
-    getJobs();
-  }, []);
+    let timer;
 
-  // Delte
+    const fetchJobs = async () => {
+      setLoading(true);
+
+      // ⏳ show skeleton only if API is slow
+      timer = setTimeout(() => {
+        setShowSkeleton(true);
+      }, 300);
+
+      await apiTryCatch(async () => {
+        const response = await api.get(`/user/getjobs/${userId}`);
+
+        const jobsData = response?.data?.data?.createdJobs || [];
+
+        setJobs(jobsData);
+        setFilteredJobs(jobsData);
+      });
+
+      clearTimeout(timer);
+      setLoading(false);
+      setShowSkeleton(false);
+    };
+
+    if (userId) {
+      fetchJobs();
+    }
+
+    return () => clearTimeout(timer);
+  }, [userId]);
+
+  // ✅ Delete Job
   async function deleteCard(id) {
     await apiTryCatch(async () => {
       const response = await api.delete(`/employer/jobs/${id}`);
       toast.success(response?.data?.message);
-      getJobs();
+
+      // refresh jobs
+      const res = await api.get(`/user/getjobs/${userId}`);
+      const jobsData = res?.data?.data?.createdJobs || [];
+
+      setJobs(jobsData);
+      setFilteredJobs(jobsData);
     });
   }
 
-  // Search Filter
+  // ✅ Search Filter
   const input = useRef();
 
   function SearchItem() {
@@ -54,7 +85,7 @@ function JobsCreated() {
           .format("DD-MMM-YYYY")
           ?.toLowerCase()
           .includes(userInput) ||
-        job.experienceLevel?.toLowerCase().includes(userInput),
+        job.experienceLevel?.toLowerCase().includes(userInput)
     );
 
     setFilteredJobs(result);
@@ -62,6 +93,7 @@ function JobsCreated() {
 
   return (
     <div className="job-created-wrapper">
+      {/* Header */}
       <div className="job-created-header">
         <motion.input
           type="text"
@@ -73,6 +105,7 @@ function JobsCreated() {
           ref={input}
           onChange={SearchItem}
         />
+
         <Link to="/dashboard/jobsform">
           <motion.button
             className="new-job-btn"
@@ -86,7 +119,25 @@ function JobsCreated() {
         </Link>
       </div>
 
-      <EmployerJobCardCreated jobs={filteredJobs} deleteCard={deleteCard} />
+      {/* ✅ Loading / Skeleton / Data */}
+      {loading ? (
+        showSkeleton ? (
+          <div className="job-card-skeleton-wrapper-jobcreated">
+            {Array(6)
+              .fill(0)
+              .map((_, i) => (
+                <JobCardSkeleton key={i} />
+              ))}
+          </div>
+        ) : (
+          <div style={{ height: "200px" }} />
+        )
+      ) : (
+        <EmployerJobCardCreated
+          jobs={filteredJobs}
+          deleteCard={deleteCard}
+        />
+      )}
     </div>
   );
 }

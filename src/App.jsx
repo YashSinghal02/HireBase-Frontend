@@ -1,8 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-// import SignUpForm from "./Components/Authentictaion/UserForm/SignUpForm";
-// import LoginForm from "./Components/Authentictaion/UserForm/LoginForm";
-// import OTPSignup from "./Components/Authentictaion/OTP/OTPSignup";
 import VerifyEmail from "./Components/Authentictaion/ForgetPassword/VerifyEmail";
 import ResetPassword from "./Components/Authentictaion/ForgetPassword/ResetPassword";
 import VerifyOTP from "./Components/Authentictaion/ForgetPassword/VerifyOTP";
@@ -35,6 +32,8 @@ import Admin from "./Pages/Admin/Admin";
 import Unauthorized from "./Pages/Unauthorized/Unauthorized";
 import EditCompany from "./Pages/Companies/EditCompany/EditCompany";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound";
+import Applicants from "./Pages/Applicants/Applicants";
+import UserProfile from "./Pages/Applicants/UserProfile/UserProfile";
 
 
 
@@ -68,6 +67,10 @@ function App() {
           </ProtectedRoutes>
         } />
 
+ {/* UserProfile */}
+           <Route path="userprofile/:id" element={<ProtectedRoutes allowedRoles={["admin","employer"]}>            
+            <UserProfile/>
+          </ProtectedRoutes>} />
 
         {/* Profile */}
         <Route path="/profile" element={
@@ -120,6 +123,13 @@ function App() {
            <Route path="jobsform" element={<ProtectedRoutes allowedRoles={["admin","employer"]}>            
             <NewJobForm/>
           </ProtectedRoutes>} />
+          {/* Applicants */}
+           <Route path="applicants" element={<ProtectedRoutes allowedRoles={["admin","employer"]}>            
+            <Applicants/>
+          </ProtectedRoutes>} />
+          {/*  */}
+          
+          {/*  */}
            <Route path="settings" element={<ProtectedRoutes allowedRoles={["admin","employer","employee"]}>            
            <Settings/>
           </ProtectedRoutes>} />
