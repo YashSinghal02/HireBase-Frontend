@@ -33,11 +33,10 @@ function RightMainProfile({ refreshProfile, userId }) {
   }, [refreshProfile, userId]);
 
   // ✅ Decide which data to show
-  const isOwnProfile = !userId;
+ 
 
-  const displayEmail = isOwnProfile ? email : data?.userId?.email;
-
-  const displayPhone = isOwnProfile ? phone : data?.userId?.phone;
+  const displayEmail = data?.userId?.email;
+  const displayPhone = data?.userId?.phone;
 
   return (
     <motion.div
@@ -100,16 +99,16 @@ function RightMainProfile({ refreshProfile, userId }) {
                   <FaGithub />
                 </a>
               ) : (
-               <FaGithub />
+                <FaGithub />
               )}
             </span>
             <span className={!data?.instagram?.trim() ? "disabled-icon" : ""}>
               {data?.instagram?.trim() ? (
                 <a href={data.instagram} target="_blank" rel="noreferrer">
-                 <FaInstagram />
+                  <FaInstagram />
                 </a>
               ) : (
-               <FaInstagram />
+                <FaInstagram />
               )}
             </span>
           </div>

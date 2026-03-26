@@ -29,24 +29,39 @@ function NavBar() {
   // 🍔 Toggle mobile menu
   const toggleHamburgerMenu = () => {
     setShowHamburgerMenu(!showHamburgerMenu);
+    setShowProfileCard(false);
   };
 
   // 👤 Toggle profile dropdown
-  const toggleProfileCard = () => {
-    setShowProfileCard(!showProfileCard);
-  };
+  // const toggleProfileCard = () => {
+  //   setShowProfileCard(!showProfileCard);
+  // };
+
+ const toggleProfileCard = () => {
+  setShowProfileCard((prev) => !prev);
+};
 
   // ❌ Close profile dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (profileRef.current && !profileRef.current.contains(e.target)) {
-        setShowProfileCard(false);
-      }
-    };
+useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (!profileRef.current) return;
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (!profileRef.current.contains(e.target)) {
+      setShowProfileCard(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+useEffect(() => {
+  setShowProfileCard(false);
+}, [isAuthorized]);
+
 
   // 🎯 Navbar hover indicator animation
   useEffect(() => {

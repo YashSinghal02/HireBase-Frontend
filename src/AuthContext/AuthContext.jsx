@@ -1,21 +1,3 @@
-// import { createContext } from "react";
-
-// export const AuthContext = createContext();
-
-// export const AuthContextProvider = ({ children }) => {
-//   const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-
-//   const userId = userDetails?.userId;
-//   const role = userDetails?.role;
-
-//     const isAuthorized = !!userDetails; 
-
-//   return (
-//     <AuthContext.Provider value={{ userId, role, isAuthorized }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
 
 import { createContext, useState } from "react";
 

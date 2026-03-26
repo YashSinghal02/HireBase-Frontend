@@ -66,7 +66,6 @@ function EditProfileForm({ setActiveTab, setRefreshProfile }) {
   async function SubmitForm(e) {
     e.preventDefault();
 
-
     await apiTryCatch(async () => {
       const payload = {
         ...data,
@@ -80,12 +79,25 @@ function EditProfileForm({ setActiveTab, setRefreshProfile }) {
       toast.success(response?.data?.message);
 
       // update AuthContext
-      setUserDetails((prev) => ({
-        ...prev,
+      // setUserDetails((prev) => ({
+      //   ...prev,
+      //   name: data.name,
+      //   email: data.email,
+      //   phone: data.phone,
+      // }));
+
+      const updatedUser = {
+        ...JSON.parse(localStorage.getItem("userDetails")),
         name: data.name,
         email: data.email,
         phone: data.phone,
-      }));
+      };
+
+      // ✅ update localStorage
+      localStorage.setItem("userDetails", JSON.stringify(updatedUser));
+
+      // ✅ update context
+      setUserDetails(updatedUser);
 
       setRefreshProfile((prev) => !prev);
       setActiveTab("MainProfile");
@@ -228,7 +240,7 @@ function EditProfileForm({ setActiveTab, setRefreshProfile }) {
 
           <div className="tag-input">
             <input
-            className="education-input"
+              className="education-input"
               value={educationInput}
               onChange={(e) => setEducationInput(e.target.value)}
               placeholder="Add education"
@@ -331,7 +343,7 @@ function EditProfileForm({ setActiveTab, setRefreshProfile }) {
 
           <div className="tag-input">
             <input
-            className="education-input"
+              className="education-input"
               value={skillInput}
               onChange={(e) => setSkillInput(e.target.value)}
               placeholder="Add skill"

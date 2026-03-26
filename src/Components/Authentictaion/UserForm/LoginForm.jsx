@@ -7,34 +7,17 @@ import toast from "react-hot-toast";
 import logo from "../../../assets/logo.png";
 import { api } from "../../../Utils/axiosConfig.js";
 import { apiTryCatch } from "../../../Utils/trycatch.js";
+import { useContext } from "react";
+import { AuthContext } from "@/AuthContext/AuthContext";
 
 function LoginForm() {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-
-  // async function SubmitForm(e) {
-  //   e.preventDefault();
-  //   await apiTryCatch(async () => {
-  //     const response = await api.post("/user/login", data);
-  //     console.log("Server response:", response.data);
-  //     console.log(response.headers.authorization);
-  //     // localStorage.setItem("accessToken",response.headers.authorization)
-  //     const token = response.headers.authorization.split(" ")[1];
-  //     localStorage.setItem("accessToken", token);
-  //     const {useId, role}=response.data;
-
-  //     setData({
-  //       email: "",
-  //       password: "",
-  //     });
-  //     toast.success(response?.data?.message);
-  //     navigate("/dashboard");
-  //   });
-  // }
 
   async function SubmitForm(e) {
     e.preventDefault();
@@ -63,10 +46,12 @@ function LoginForm() {
 
       const { id, role, name, email, phone } = response.data.data;
 
-      localStorage.setItem(
-        "userDetails",
-        JSON.stringify({ userId: id, role, name, email, phone }),
-      );
+      // localStorage.setItem(
+      //   "userDetails",
+      //   JSON.stringify({ userId: id, role, name, email, phone }),
+      // );
+
+      login({ userId: id, role, name, email, phone });
 
       toast.success(response?.data?.message);
       navigate("/dashboard");

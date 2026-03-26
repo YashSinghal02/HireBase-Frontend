@@ -9,6 +9,10 @@ import { api } from "@/Utils/axiosConfig";
 import { apiTryCatch } from "@/Utils/trycatch";
 
 function Jobs() {
+ const [filters, setFilters] = useState({
+  location: "",
+  industry: "",
+});
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [loading, setLoading] = useState(true); 
@@ -43,6 +47,7 @@ function Jobs() {
   getData();
     return () => clearTimeout(timer);
 }, []);
+
 // Array(6) - How many fake cards do I want to show while loading
 // fill(0) - .map() does NOT work properly on empty slots [0,0,0,0,0,0] → real items → map runs 6 times
 // key={i} - React needs unique key for each item ,i is used just for identification
@@ -52,11 +57,31 @@ function Jobs() {
 // .fill(0) fills them with real values, so .map() runs 6 times.
 // i is used only for React key.”
 
+
+// filtered
+useEffect(() => {
+  let filtered = jobs;
+
+  if (filters.location) {
+    filtered = filtered.filter((job) =>
+      job.location?.toLowerCase().includes(filters.location.toLowerCase())
+    );
+  }
+
+  if (filters.industry) {
+    filtered = filtered.filter((job) =>
+      job.jobTitle?.toLowerCase().includes(filters.industry.toLowerCase())
+    );
+  }
+
+  setFilteredJobs(filtered);
+}, [filters, jobs]);
+
 return (
   <div>
     <HeroJob jobs={jobs} setFilteredJobs={setFilteredJobs} />
     <JobCardTitle />
-    <FilterJobs />
+    <FilterJobs filters={filters} setFilters={setFilters} />
 
     {loading ? (
       showSkeleton ? (

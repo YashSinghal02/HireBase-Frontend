@@ -55,3 +55,22 @@
   accent-color: #3DAA7D;
   cursor: pointer;
 }
+
+.filter-actions {
+  margin-left: auto;
+}
+
+.reset-btn {
+  background-color: #3DAA7D;
+  color: #0f1514;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.reset-btn:hover {
+  opacity: 0.8;
+}
