@@ -1,67 +1,92 @@
 # HireBase – Job Portal Frontend
 
 HireBase is a modern job portal application designed to connect employers and job seekers.
-This repository contains the **frontend implementation** built using React.js.
 
-The frontend provides the user interface for browsing jobs, authentication flows, and dashboard interactions while integrating with backend APIs.
+This repository contains the frontend implementation built using React.js. It provides a responsive and user-friendly interface for job browsing, authentication, employer dashboards, and applicant tracking, while integrating with backend APIs.
 
 ---
+
 ## Screenshots
 
+### Sign Up Page
 ![SignUp Page](./screenshots/signup.png)
 
-![Login Listing](./screenshots/login.png)
+### Login Page
+![Login Page](./screenshots/login.png)
 
+### Home Page
 ![Home Page](./screenshots/home.png)
 
+### Dashboard Page
 ![Dashboard Page](./screenshots/dashboard.png)
 
 ---
 
 ## Project Status
 
-* Frontend UI completed
-* Responsive layout implemented
-* Authentication flow designed
-* Axios interceptors configured for API requests
-* Backend API integration in progress
+- Frontend UI completed  
+- Responsive layout implemented  
+- Authentication flow implemented  
+- Role-based access control implemented  
+- Employer dashboard completed  
+- Applicant tracking system implemented  
+- Axios interceptors configured for API requests  
+- Backend API integration in progress  
 
 ---
 
 ## Tech Stack
 
-* React.js
-* React Router
-* Axios
-* Framer Motion
-* CSS3
-* React Icons
+- React.js  
+- React Router  
+- Axios  
+- Framer Motion  
+- CSS3  
+- React Icons  
 
 ---
 
 ## Features
 
-* User authentication interface
-* Job listings and job detail pages
-* Job filtering and browsing UI
-* Responsive design for different screen sizes
-* Reusable component architecture
-* Animation support using Framer Motion
-* API integration structure using Axios
+### Authentication and Security
+- User signup and login  
+- JWT-based authentication  
+- Protected routes for authenticated users  
+- Role-based access control (Employee and Employer)  
+
+### Job Management
+- Job listings and job detail pages  
+- Job filtering and browsing interface  
+
+### Employer Functionality
+- Employer dashboard for job management  
+- View applicants for posted jobs  
+- View applicant details  
+- Track application time and related data  
+
+### User Interface
+- Fully responsive design  
+- Reusable component architecture  
+- Smooth animations using Framer Motion  
+
+### Error Handling
+- Custom 403 Forbidden page  
+- Custom 404 Not Found page  
 
 ---
 
 ## Project Structure
 
-```
+```bash
 src/
- ├── components
- ├── pages
- ├── assets
- ├── api
- ├── hooks
- ├── context
- └── utils
+├── components
+├── pages
+├── assets
+├── api
+├── hooks
+├── context
+└── utils
+
 ```
 
 ---
@@ -91,22 +116,6 @@ npm install
 ```bash
 npm run dev
 ```
-
-The application will run on:
-
-```
-http://localhost:5173
-```
-
----
-
-## Future Improvements
-
-* Backend API integration
-* Job application system
-* User dashboard
-* Resume upload functionality
-* Admin dashboard
 
 ---
 
