@@ -16,32 +16,64 @@ function ProfileHeader({ refreshProfile, viewUserId }) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
-  // ✅ Fetch Profile
+  //  Fetch Profile
+  // async function getProfile() {
+  //   setLoading(true);
+
+  //   try {
+  //     await apiTryCatch(async () => {
+  //       let response;
+
+  //       if (viewUserId) {
+  //         //  Employer viewing applicant
+  //         response = await api.get(`/profile/${viewUserId}`);
+  //       } else {
+  //         //  Own profile
+  //         if (role === "employer") {
+  //           response = await api.get("/company-profile");
+  //         } else {
+  //           response = await api.get("/profile");
+  //         }
+  //       }
+
+  //       setData(response?.data?.data);
+  //     });
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
+
   async function getProfile() {
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      await apiTryCatch(async () => {
-        let response;
+  try {
+    let response;
 
-        if (viewUserId) {
-          // 👀 Employer viewing applicant
-          response = await api.get(`/profile/${viewUserId}`);
-        } else {
-          // 👤 Own profile
-          if (role === "employer") {
-            response = await api.get("/company-profile");
-          } else {
-            response = await api.get("/profile");
-          }
-        }
-
-        setData(response?.data?.data);
-      });
-    } finally {
-      setLoading(false);
+    if (viewUserId) {
+      response = await apiTryCatch(() =>
+        api.get(`/profile/${viewUserId}`)
+      );
+    } else {
+      if (role === "employer") {
+        response = await apiTryCatch(() =>
+          api.get("/company-profile")
+        );
+      } else {
+        response = await apiTryCatch(() =>
+          api.get("/profile")
+        );
+      }
     }
+
+    setData(response?.data?.data);
+
+  } catch (err) {
+    // already handled globally (toast shown)
+  } finally {
+    setLoading(false);
   }
+}
+
 
   useEffect(() => {
     if (role) {
@@ -76,7 +108,7 @@ function ProfileHeader({ refreshProfile, viewUserId }) {
 
       getProfile(); // refresh
     } catch (error) {
-      console.log("Upload error:", error);
+      // console.log("Upload error:", error);
     }
   };
 

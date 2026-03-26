@@ -32,37 +32,27 @@ function OTPSignup() {
     }));
   }, []);
 
-  async function OTPSend(e) {
-    e.preventDefault();
-    const finalOtp = data.otp1 + data.otp2 + data.otp3 + data.otp4;
-    //   try {
-    //       const response=await api.post("/user/otp",{email: data.email,
-    //   otp: finalOtp});
-    //   console.log("response.data",response.data)
-    //   toast.success(response?.data?.message);
-    //    navigate("/login", { replace: true });
-    //   } catch (error) {
-    //       console.error("Error submitting form:", error);
-    // console.log(error?.response?.data?.message);
-    // toast.error(error?.response?.data?.message);
-    //   }
+async function OTPSend(e) {
+  e.preventDefault();
 
-    await apiTryCatch(async () => {
-      const response = await api.post("/user/otp", {
+  const finalOtp =
+    data.otp1 + data.otp2 + data.otp3 + data.otp4;
+
+  try {
+    const response = await apiTryCatch(() =>
+      api.post("/user/otp", {
         email: data.email,
         otp: finalOtp,
-      });
-      // console.log("response.data",response.data)
-      if (!response) return;
+      })
+    );
 
-      if (response.data.status === "fail") {
-        toast.error(response.data.message);
-        return;
-      }
-      toast.success(response?.data?.message);
-      navigate("/login", { replace: true });
-    });
+    toast.success(response?.data?.message);
+    navigate("/login", { replace: true });
+
+  } catch (err) {
+    // already handled globally (toast shown)
   }
+}
 
   return (
     <div className="otp-page">

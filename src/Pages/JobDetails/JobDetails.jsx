@@ -59,21 +59,31 @@ function JobDetails() {
 
   
 
-  // Apply Jobs
-  async function handleApply(jobId) {
-    await apiTryCatch(async () => {
-      const res = await api.post(`/jobs/${jobId}/apply/`);
-      toast.success(res.data.message);
-    });
-  }
+  // Apply Job
+ const handleApply = async (jobId) => {
+  try {
+    const res = await apiTryCatch(() =>
+      api.post(`/jobs/${jobId}/apply/`)
+    );
 
-  // Save Jobs
-  async function handleSave(jobId) {
-    await apiTryCatch(async () => {
-      const res = await api.post(`/savedjobs/${jobId}/save`);
-      toast.success(res.data.message);
-    });
+    toast.success(res.data.message);
+  } catch (err) {
+  // handled globally (toast already shown)
   }
+};
+
+  // Save Job
+const handleSave = async (jobId) => {
+  try {
+    const res = await apiTryCatch(() =>
+      api.post(`/savedjobs/${jobId}/save`)
+    );
+
+    toast.success(res.data.message);
+  } catch (err) {
+  // handled globally (toast already shown)
+  }
+};;
 
   return (
     <div className="jobDetails-wrapper">

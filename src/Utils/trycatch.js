@@ -27,7 +27,7 @@ export const apiTryCatch = async (fn) => {
 
     toast.error(message);
 
-    return error; // ✅ no crash, no console error
+    throw error; // ✅ no crash, no console error
   }
 };
 

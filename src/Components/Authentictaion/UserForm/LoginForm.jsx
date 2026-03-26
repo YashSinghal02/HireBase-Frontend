@@ -53,10 +53,10 @@ function LoginForm() {
 
       if (!response) return;
 
-      if (response.data.status === "fail") {
-    toast.error(response.data.message);
-    return;
-  }
+  //     if (response.data.status === "fail") {
+  //   toast.error(response.data.message);
+  //   return;
+  // }
 
       const token = response.headers.authorization.split(" ")[1];
       localStorage.setItem("accessToken", token);
@@ -70,6 +70,9 @@ function LoginForm() {
 
       toast.success(response?.data?.message);
       navigate("/dashboard");
+    }
+    catch(error){
+      
     } finally {
       setLoading(false); // ✅ always runs
     }

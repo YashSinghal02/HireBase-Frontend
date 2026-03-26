@@ -26,7 +26,7 @@ function LeftMainProfile({ refreshProfile, userId: viewUserId }) {
       }
 
       setData(response?.data?.data);
-      console.log(response?.data?.data)
+      // console.log(response?.data?.data)
     });
   }
 

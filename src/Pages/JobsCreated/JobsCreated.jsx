@@ -13,22 +13,22 @@ import JobCardSkeleton from "@/Components/JobsMapCard/JobCardSkeleton";
 function JobsCreated() {
   const { userId } = useContext(AuthContext);
 
-  // ✅ Loading states
+  // Loading states
   const [loading, setLoading] = useState(true);
   const [showSkeleton, setShowSkeleton] = useState(false);
 
-  // ✅ Jobs state
+  // Jobs state
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
 
-  // ✅ Fetch Jobs (same pattern as AppliedJobs)
+  //  Fetch Jobs (same pattern as AppliedJobs)
   useEffect(() => {
     let timer;
 
     const fetchJobs = async () => {
       setLoading(true);
 
-      // ⏳ show skeleton only if API is slow
+      // show skeleton only if API is slow
       timer = setTimeout(() => {
         setShowSkeleton(true);
       }, 300);

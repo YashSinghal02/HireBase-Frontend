@@ -18,20 +18,30 @@ function JobsCards({ jobs }) {
   const { role, isAuthorized } = useContext(AuthContext);
 
   // Apply Job
-  const handleApply = async (jobId) => {
-    await apiTryCatch(async () => {
-      const res = await api.post(`/jobs/${jobId}/apply/`);
-      toast.success(res.data.message);
-    });
-  };
+ const handleApply = async (jobId) => {
+  try {
+    const res = await apiTryCatch(() =>
+      api.post(`/jobs/${jobId}/apply/`)
+    );
+
+    toast.success(res.data.message);
+  } catch (err) {
+  // handled globally (toast already shown)
+  }
+};
 
   // Save Job
-  const handleSave = async (jobId) => {
-    await apiTryCatch(async () => {
-      const res = await api.post(`/savedjobs/${jobId}/save`);
-      toast.success(res.data.message);
-    });
-  };
+const handleSave = async (jobId) => {
+  try {
+    const res = await apiTryCatch(() =>
+      api.post(`/savedjobs/${jobId}/save`)
+    );
+
+    toast.success(res.data.message);
+  } catch (err) {
+  // handled globally (toast already shown)
+  }
+};;
 
   if (!jobs.length) {
     return (

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 function UserProfile() {
     const { id } = useParams();
 
-  console.log("USER ID 👉", id);
+  // console.log("USER ID 👉", id);
   return (
     <div>
         <motion.div className="main-profile"

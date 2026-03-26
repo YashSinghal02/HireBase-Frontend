@@ -38,10 +38,10 @@ function SignUpForm() {
 
     if (!response) return;
 
-      if (response.data.status === "fail") {
-    toast.error(response.data.message);
-    return;
-  }
+  //     if (response.data.status === "fail") {
+  //   toast.error(response.data.message);
+  //   return;
+  // }
 
     setData({
       name: "",
@@ -55,6 +55,8 @@ function SignUpForm() {
 
     navigate("/otp", { state: { email: data.email } });
 
+  }catch(error){
+    
   } finally {
     setLoading(false); // ✅ always runs
   }
