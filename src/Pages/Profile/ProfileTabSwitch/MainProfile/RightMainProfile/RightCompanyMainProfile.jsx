@@ -8,7 +8,7 @@ import { AuthContext } from "@/AuthContext/AuthContext";
 
 function RightCompanyMainProfile({ refreshProfile }) {
 
-  const { email, phone } = useContext(AuthContext);
+  const { email, phone,userId } = useContext(AuthContext);
 
   const [data, setData] = useState(null);
 
@@ -27,6 +27,9 @@ function RightCompanyMainProfile({ refreshProfile }) {
   useEffect(() => {
     getProfile();
   }, [refreshProfile]);
+
+  const displayEmail = data?.userId?.email || email;
+const displayPhone = data?.userId?.phone || phone;
 
   return (
     <div className="right-company-main-wrapper">
@@ -65,14 +68,21 @@ function RightCompanyMainProfile({ refreshProfile }) {
         <div className="right-company-main-detail-row">
           <span className="right-main-label">Email</span>
           <span className="right-main-value">
-            {email || "N/A"}
+              {data?.companyEmail || "No overview added yet."}
+          </span>
+        </div>
+
+         <div className="right-company-main-detail-row">
+          <span className="right-main-label">Recuriter Email</span>
+          <span className="right-main-value">
+              {displayEmail || "N/A"}
           </span>
         </div>
 
         <div className="right-company-main-detail-row">
           <span className="right-main-label">Phone</span>
           <span className="right-main-value">
-            {phone || "N/A"}
+             {displayPhone || "N/A"}
           </span>
         </div>
 

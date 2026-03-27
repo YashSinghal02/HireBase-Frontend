@@ -62,15 +62,28 @@ function CompanyEditProfileForm({ setActiveTab, setRefreshProfile }) {
       toast.success(response?.data?.message);
 
       // update AuthContext user info
-      setUserDetails((prev) => ({
-        ...prev,
+      // setUserDetails((prev) => ({
+      //   ...prev,
+      //   name: data.name,
+      //   email: data.email,
+      //   phone: data.phone,
+      // }));
+      const updatedUser = {
+        ...JSON.parse(localStorage.getItem("userDetails")),
         name: data.name,
         email: data.email,
         phone: data.phone,
-      }));
+      };
+
+      // ✅ update localStorage
+      localStorage.setItem("userDetails", JSON.stringify(updatedUser));
+
+      // ✅ update context
+      setUserDetails(updatedUser);
+
       setRefreshProfile((prev) => !prev);
       setActiveTab("MainProfile");
-    });
+    });;
   }
 
   // ---------------- GET PROFILE ----------------
