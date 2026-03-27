@@ -4,7 +4,11 @@ import {
   FaFileAlt,
   FaCog,
   FaBuilding,
+  
 } from "react-icons/fa";
+
+import { MdPostAdd } from "react-icons/md";
+
 
 export const Navitems = [
   {
@@ -32,9 +36,9 @@ export const Navitems = [
     allowedRoles: ["admin", "employer"],
   },
   {
-    name: "Jobs Created",
+    name: "Post Jobs",
     path: "/dashboard/jobscreated",
-    icon: <FaFileAlt />,
+    icon: <MdPostAdd size={20} />,
     allowedRoles: ["admin", "employer"],
   },
   {
