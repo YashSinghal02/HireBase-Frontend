@@ -1,12 +1,12 @@
 # HireBase – Job Portal Frontend
 
-HireBase is a modern job portal application designed to connect employers and job seekers.
+HireBase is a full-stack job portal designed to simulate real-world hiring workflows between candidates and employers.
 
-This repository contains the frontend implementation built using React.js. It provides a responsive and user-friendly interface for job browsing, authentication, employer dashboards, and applicant tracking, while integrating with backend APIs.
+This repository contains the frontend built with React.js, focusing on performance, clean UI, and role-based user experience.
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
 ### Sign Up Page
 ![SignUp Page](./screenshots/signup.png)
@@ -14,28 +14,15 @@ This repository contains the frontend implementation built using React.js. It pr
 ### Login Page
 ![Login Page](./screenshots/login.png)
 
-### Home Page
+### Home
 ![Home Page](./screenshots/home.png)
 
-### Dashboard Page
+### Dashboard
 ![Dashboard Page](./screenshots/dashboard.png)
 
 ---
 
-## Project Status
-
-- Frontend UI completed  
-- Responsive layout implemented  
-- Authentication flow implemented  
-- Role-based access control implemented  
-- Employer dashboard completed  
-- Applicant tracking system implemented  
-- Axios interceptors configured for API requests  
-- Backend API integration in progress  
-
----
-
-## Tech Stack
+## 🛠 Tech Stack
 
 - React.js  
 - React Router  
@@ -46,36 +33,52 @@ This repository contains the frontend implementation built using React.js. It pr
 
 ---
 
-## Features
+## ✨ Features
 
-### Authentication and Security
+### 🔐 Authentication & Access Control
 - User signup and login  
 - JWT-based authentication  
-- Protected routes for authenticated users  
-- Role-based access control (Employee and Employer)  
-
-### Job Management
-- Job listings and job detail pages  
-- Job filtering and browsing interface  
-
-### Employer Functionality
-- Employer dashboard for job management  
-- View applicants for posted jobs  
-- View applicant details  
-- Track application time and related data  
-
-### User Interface
-- Fully responsive design  
-- Reusable component architecture  
-- Smooth animations using Framer Motion  
-
-### Error Handling
-- Custom 403 Forbidden page  
-- Custom 404 Not Found page  
+- Protected routes  
+- Role-based access (Candidate & Employer)  
+- Separate layouts for different user roles  
 
 ---
 
-## Project Structure
+### 💼 Candidate Functionality
+- Browse all jobs  
+- Search and filter jobs (city & industry)  
+- Apply to jobs  
+- Save jobs for later  
+- Manage profile & settings  
+
+---
+
+### 🏢 Employer Functionality
+- Dashboard with structured sections:
+  - Jobs (view all jobs)
+  - Companies (search & manage companies)
+  - Post Jobs (create & manage listings)
+  - Applicants (view candidates who applied)
+- View detailed applicant data  
+
+---
+
+### ⚡ Performance & UX
+- Skeleton loaders for better perceived performance  
+- Smooth animations using Framer Motion  
+- Fully responsive design  
+- Clean and reusable component architecture  
+
+---
+
+### 🛡️ Error Handling & Stability
+- Custom 403 Forbidden page  
+- Custom 404 Not Found page  
+- Axios interceptors for API handling  
+
+---
+
+## 📁 Project Structure
 
 ```bash
 src/
@@ -86,6 +89,7 @@ src/
 ├── hooks
 ├── context
 └── utils
+
 
 ```
 
