@@ -98,7 +98,7 @@ function LoginForm() {
           </div>
 
           <div className="forget-password">
-            <p>Forgot Password?</p>
+            <Link to="/verifyemail"><p>Forgot Password?</p></Link>
           </div>
         </div>
 

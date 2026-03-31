@@ -13,6 +13,9 @@ export const AuthContextProvider = ({ children }) => {
   const name = userDetails?.name;   // store name
   const email = userDetails?.email; // store email
   const phone = userDetails?.phone; // store phonenumber
+// It converts the value into true or false
+// If userDetails exists (object) → true
+// If userDetails is null → false
   const isAuthorized = !!userDetails;
 
   const login = (details) => {

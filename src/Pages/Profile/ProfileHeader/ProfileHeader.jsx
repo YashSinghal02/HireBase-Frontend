@@ -16,33 +16,6 @@ function ProfileHeader({ refreshProfile, viewUserId }) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
-  //  Fetch Profile
-  // async function getProfile() {
-  //   setLoading(true);
-
-  //   try {
-  //     await apiTryCatch(async () => {
-  //       let response;
-
-  //       if (viewUserId) {
-  //         //  Employer viewing applicant
-  //         response = await api.get(`/profile/${viewUserId}`);
-  //       } else {
-  //         //  Own profile
-  //         if (role === "employer") {
-  //           response = await api.get("/company-profile");
-  //         } else {
-  //           response = await api.get("/profile");
-  //         }
-  //       }
-
-  //       setData(response?.data?.data);
-  //     });
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
   async function getProfile() {
   setLoading(true);
 

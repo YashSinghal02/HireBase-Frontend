@@ -57,6 +57,20 @@ function App() {
       <Route path="/login" element={<LoginForm />} />
        <Route path="/signup" element={<SignUpForm/>} />
         <Route path="/otp" element={<OTPSignup/>} />
+        
+        {/* Forgrt password */}
+
+        {/* Verfiy email */}
+         <Route path="/verifyemail" element={<VerifyEmail/>} />
+
+         {/* Verfiy OTP */}
+         <Route path="/verifyotp" element={<VerifyOTP/>} />
+
+         {/* Chnage password */}
+         <Route path="/changepassword" element={<ResetPassword/>} />
+
+
+
   <Route path="/unauthorized" element={<Unauthorized/>} />
    <Route path="*" element={<PageNotFound/>} />
 

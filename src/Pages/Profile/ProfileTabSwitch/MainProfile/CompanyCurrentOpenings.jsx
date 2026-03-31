@@ -83,7 +83,13 @@ function CompanyCurrentOpenings() {
               <div key={job._id} className="company-row">
                 <div>{job.jobTitle}</div>
                 <div>{job.companyName}</div>
-                <div>{job.salary}</div>
+                <div>{job.salary
+                ? job.salary.toUpperCase().includes("LPA")
+                  ? job.salary.toUpperCase() // 🔥 fix here
+                  : /^[0-9]+(\s*-\s*[0-9]+)?$/.test(job.salary.trim())
+                    ? `${job.salary} LPA`
+                    : job.salary
+                : "Not specified"}</div>
                 <div className="location-col">
                   <IoLocationOutline /> {job.location}
                 </div>
