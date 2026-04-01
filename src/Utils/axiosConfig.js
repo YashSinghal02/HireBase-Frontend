@@ -13,8 +13,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: "https://job-portal-backend-6j6e.onrender.com/api",
-  // baseURL: "http://localhost:3000/api",
+    // baseURL: "https://job-portal-backend-6j6e.onrender.com/api",
+  baseURL: "http://localhost:3000/api",
   withCredentials: true, // IMPORTANT for cookies
 });
 
@@ -54,7 +54,7 @@ api.interceptors.response.use(
         // const newAccessToken = res.data.accessToken;
         // ***********//
         const newAccessToken =res.headers.authorization.split(" ")[1];
-        // console.log("newAccessToken",newAccessToken)
+        console.log("newAccessToken",newAccessToken)
         // ***********//
         // Save new token
         localStorage.setItem("accessToken", newAccessToken);
