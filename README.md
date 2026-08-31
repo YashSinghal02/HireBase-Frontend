@@ -78,8 +78,6 @@ This repository contains the frontend built with React.js, focusing on performan
 
 ---
 
----
-
 ## Installation
 
 ### 1. Clone the repository
@@ -113,7 +111,7 @@ npm run dev
 The frontend communicates with a separate backend that handles server-side functionality including authentication, messaging, user management, image uploads, and email services.
 
 **Backend Repository:**
-https://github.com/YashSinghal02/ChitChatBackend
+https://github.com/YashSinghal02/Job-Portal-Backend
 
 ---
 
